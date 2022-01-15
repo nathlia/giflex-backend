@@ -8,7 +8,7 @@ public class Character {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long characterId;
+  private long characterId;
 
   @Column(name = "name")
   private String name;

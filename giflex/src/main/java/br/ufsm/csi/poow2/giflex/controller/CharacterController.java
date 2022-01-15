@@ -46,7 +46,7 @@ public class CharacterController {
     }
 
     @GetMapping("/characters/{id}")
-    public ResponseEntity<Character> getCharacterById(@PathVariable("id") Long id) {
+    public ResponseEntity<Character> getCharacterById(@PathVariable("id") long id) {
         Optional<Character> characterData = characterRepository.findById(id);
 
         if (characterData.isPresent()) {
@@ -56,17 +56,6 @@ public class CharacterController {
         }
     }
 
-//    @GetMapping("/characters/{name}")
-//    public ResponseEntity<Character> getCharacterByName(@PathVariable String name) {
-//        Optional<Character> characterData = characterRepository.findByName(name);
-//
-//        if (characterData.isPresent()) {
-//            return new ResponseEntity<>(characterData.get(), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-
     @PostMapping("/characters")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character _character = characterRepository.save(new Character(character.getName(), character.getLevel(), character.getCritRate(), character.getCritDmg()));
@@ -74,7 +63,7 @@ public class CharacterController {
     }
 
     @PutMapping("/characters/{id}/edit")
-    public ResponseEntity<Character> editCharacter(@PathVariable("id") Long id, @RequestBody Character character ) {
+    public ResponseEntity<Character> editCharacter(@PathVariable("id") long id, @RequestBody Character character ) {
         Optional<Character> characterData = characterRepository.findById(id);
 
         if (characterData.isPresent()) {
@@ -89,4 +78,16 @@ public class CharacterController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("characters/{id}")
+    public ResponseEntity<Character> deleteCharacterById(@PathVariable("id") long id) {
+
+        try {
+            characterRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
