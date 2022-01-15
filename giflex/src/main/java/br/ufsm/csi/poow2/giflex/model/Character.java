@@ -8,85 +8,85 @@ public class Character {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int CharacterId;
+  private Long characterId;
 
   @Column(name = "name")
-  private String Name;
+  private String name;
 
   @Column(name = "level")
-  private String Level;
+  private String level;
 
   @Column(name = "critrate")
-  private String CritRate;
+  private String critRate;
 
   @Column(name = "critdmg")
-  private String CritDmg;
+  private String critDmg;
 
   public Character() {
 
   }
 
-  public Character(int CharacterId) {
-    this.CharacterId = CharacterId;
+  public Character(Long CharacterId) {
+    this.characterId = CharacterId;
   }
 
   public Character(String name, String level, String critRate, String critDmg) {
-    Name = name;
-    Level = level;
-    CritRate = critRate;
-    CritDmg = critDmg;
+    this.name = name;
+    this.level = level;
+    this.critRate = critRate;
+    this.critDmg = critDmg;
   }
 
-  public Character(int characterId, String name, String level, String critRate, String critDmg) {
-    CharacterId = characterId;
-    Name = name;
-    Level = level;
-    CritRate = critRate;
-    CritDmg = critDmg;
+  public Character(Long characterId, String name, String level, String critRate, String critDmg) {
+    this.characterId = characterId;
+    this.name = name;
+    this.level = level;
+    this.critRate = critRate;
+    this.critDmg = critDmg;
   }
 
-  public int getCharacterId() {
-    return CharacterId;
+  public Long getCharacterId() {
+    return characterId;
   }
 
-  public void setCharacterId(int characterId) {
-    this.CharacterId = characterId;
+  public void setCharacterId(Long characterId) {
+    this.characterId = characterId;
   }
 
 
   public String getName() {
-    return Name;
+    return name;
   }
 
   public void setName(String name) {
-    this.Name = name;
+    this.name = name;
   }
 
 
   public String getLevel() {
-    return Level;
+    return level;
   }
 
   public void setLevel(String level) {
-    this.Level = level;
+    this.level = level;
   }
 
 
   public String getCritRate() {
-    return CritRate;
+    return critRate;
   }
 
   public void setCritRate(String critRate) {
-    this.CritRate = critRate;
+    this.critRate = critRate;
   }
 
 
   public String getCritDmg() {
-    return CritDmg;
+    return critDmg;
   }
 
   public void setCritDmg(String critDmg) {
-    this.CritDmg = critDmg;
+    this.critDmg = critDmg;
   }
 
 }
