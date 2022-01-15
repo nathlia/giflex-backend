@@ -1,11 +1,25 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "character")
 public class Character {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int CharacterId;
+
+  @Column(name = "name")
   private String Name;
+
+  @Column(name = "level")
   private String Level;
+
+  @Column(name = "critrate")
   private String CritRate;
+
+  @Column(name = "critdmg")
   private String CritDmg;
 
   public Character() {

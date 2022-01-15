@@ -1,11 +1,22 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "player")
 public class Player {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int UserId;
-  private String Name;
+
+  @Column(name = "username")
   private String Username;
+
+  @Column(name = "name")
+  private String Name;
+
+  @Column(name = "password")
   private String Password;
 
   public Player() {

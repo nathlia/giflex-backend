@@ -23,10 +23,10 @@ public class Artifact {
   @Column(name = "mainstatvalue")
   private double MainStatValue;
 
-  private ArtifactType artifactType;
-  private ArtifactSetType artifactSetType;
-  private Substat MainStat;
-  private ArrayList<Substat> Substats;
+//  private ArtifactType artifactType;
+//  private ArtifactSetType artifactSetType;
+//  private Substat MainStat;
+//  private ArrayList<Substat> Substats;
 
   public Artifact() {
 
@@ -91,35 +91,36 @@ public class Artifact {
     MainStatValue = mainStatValue;
   }
 
-  public ArtifactType getArtifactType() {
-    return artifactType;
-  }
+//  public ArtifactType getArtifactType() {
+//    return artifactType;
+//  }
+//
+//  public void setArtifactType(ArtifactType artifactType) {
+//    this.artifactType = artifactType;
+//  }
+//
+//  public ArtifactSetType getArtifactSetType() {
+//    return artifactSetType;
+//  }
+//
+//  public void setArtifactSetType(ArtifactSetType artifactSetType) {
+//    this.artifactSetType = artifactSetType;
+//  }
+//
+//  public Substat getMainStat() {
+//    return MainStat;
+//  }
+//
+//  public void setMainStat(Substat mainStat) {
+//    MainStat = mainStat;
+//  }
+//
+//  public ArrayList<Substat> getSubstats() {
+//    return Substats;
+//  }
+//
+//  public void setSubstats(ArrayList<Substat> substats) {
+//    Substats = substats;
+//  }
 
-  public void setArtifactType(ArtifactType artifactType) {
-    this.artifactType = artifactType;
-  }
-
-  public ArtifactSetType getArtifactSetType() {
-    return artifactSetType;
-  }
-
-  public void setArtifactSetType(ArtifactSetType artifactSetType) {
-    this.artifactSetType = artifactSetType;
-  }
-
-  public Substat getMainStat() {
-    return MainStat;
-  }
-
-  public void setMainStat(Substat mainStat) {
-    MainStat = mainStat;
-  }
-
-  public ArrayList<Substat> getSubstats() {
-    return Substats;
-  }
-
-  public void setSubstats(ArrayList<Substat> substats) {
-    Substats = substats;
-  }
 }

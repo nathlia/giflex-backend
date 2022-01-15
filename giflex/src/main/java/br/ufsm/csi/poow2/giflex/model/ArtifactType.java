@@ -1,9 +1,16 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "artifacttype")
 public class ArtifactType {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int ArtifactTypeId;
+
+  @Column(name = "name")
   private String Name;
 
   public ArtifactType() {

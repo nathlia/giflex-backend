@@ -1,9 +1,19 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "substat")
 public class Substat {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int SubstatId;
+
+  @Column(name = "name")
   private String Name;
+
+  @Column(name = "value")
   private double Value;
 
   public Substat() {

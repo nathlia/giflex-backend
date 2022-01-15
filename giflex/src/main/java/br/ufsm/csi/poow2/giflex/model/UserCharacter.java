@@ -1,13 +1,23 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "usercharacter")
 public class UserCharacter {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int UserCharacterId;
+
+  @Column(name = "playerid")
   private int PlayerId;
+
+  @Column(name = "characterid")
   private int CharacterId;
 
-  private Player player;
-  private Character character;
+//  private Player player;
+//  private Character character;
 
   public UserCharacter() {
 
@@ -54,19 +64,20 @@ public class UserCharacter {
     this.CharacterId = characterId;
   }
 
-  public Player getPlayer() {
-    return player;
-  }
+//  public Player getPlayer() {
+//    return player;
+//  }
+//
+//  public void setPlayer(Player player) {
+//    this.player = player;
+//  }
+//
+//  public Character getCharacter() {
+//    return character;
+//  }
+//
+//  public void setCharacter(Character character) {
+//    this.character = character;
+//  }
 
-  public void setPlayer(Player player) {
-    this.player = player;
-  }
-
-  public Character getCharacter() {
-    return character;
-  }
-
-  public void setCharacter(Character character) {
-    this.character = character;
-  }
 }
