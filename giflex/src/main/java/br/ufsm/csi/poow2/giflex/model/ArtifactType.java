@@ -7,43 +7,42 @@ import javax.persistence.*;
 public class ArtifactType {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private int ArtifactTypeId;
+  private int artifactTypeId;
 
   @Column(name = "name")
-  private String Name;
+  private String name;
 
   public ArtifactType() {
   }
 
   public ArtifactType(int artifactTypeId) {
-    ArtifactTypeId = artifactTypeId;
+    this.artifactTypeId = artifactTypeId;
   }
 
   public ArtifactType( String name) {
-    Name = name;
+    this.name = name;
   }
 
   public ArtifactType(int artifactTypeId, String name) {
-    ArtifactTypeId = artifactTypeId;
-    Name = name;
+    this.artifactTypeId = artifactTypeId;
+    this.name = name;
   }
 
   public int getArtifactTypeId() {
-    return ArtifactTypeId;
+    return artifactTypeId;
   }
 
   public void setArtifactTypeId(int artifactTypeId) {
-    this.ArtifactTypeId = artifactTypeId;
+    this.artifactTypeId = artifactTypeId;
   }
 
 
   public String getName() {
-    return Name;
+    return name;
   }
 
   public void setName(String name) {
-    this.Name = name;
+    this.name = name;
   }
 
 }

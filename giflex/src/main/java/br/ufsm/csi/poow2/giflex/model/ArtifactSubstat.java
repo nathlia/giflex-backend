@@ -1,6 +1,8 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 
+import com.sun.xml.bind.v2.TODO;
+
 import javax.persistence.*;
 
 
@@ -10,16 +12,17 @@ public class ArtifactSubstat {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int ArtifactSubstatId;
+  private int artifactSubstatId;
 
-  private int ArtifactId;
+  private int artifactId;
 
 //  @Column(name = "artifacttypeid")
-  private int SubstatId;
+  private int substatId;
 
   @Column(name = "substatvalue")
-  private double SubstatValue;
+  private double substatValue;
 
+  //TODO add foreign tables
 
 //  private Artifact artifact;
 //  private Substat substat;
@@ -29,53 +32,53 @@ public class ArtifactSubstat {
   }
 
   public ArtifactSubstat(int artifactSubstatId) {
-    ArtifactSubstatId = artifactSubstatId;
+    this.artifactSubstatId = artifactSubstatId;
   }
 
   public ArtifactSubstat(int artifactId, int substatId, double substatValue) {
-    ArtifactId = artifactId;
-    SubstatId = substatId;
-    SubstatValue = substatValue;
+    this.artifactId = artifactId;
+    this.substatId = substatId;
+    this.substatValue = substatValue;
   }
 
   public ArtifactSubstat(int artifactSubstatId, int artifactId, int substatId, double substatValue) {
-    ArtifactSubstatId = artifactSubstatId;
-    ArtifactId = artifactId;
-    SubstatId = substatId;
-    SubstatValue = substatValue;
+    this.artifactSubstatId = artifactSubstatId;
+    this.artifactId = artifactId;
+    this.substatId = substatId;
+    this.substatValue = substatValue;
   }
 
   public int getArtifactSubstatId() {
-    return ArtifactSubstatId;
+    return artifactSubstatId;
   }
 
   public void setArtifactSubstatId(int artifactSubstatId) {
-    this.ArtifactSubstatId = artifactSubstatId;
+    this.artifactSubstatId = artifactSubstatId;
   }
 
   public int getArtifactId() {
-    return ArtifactId;
+    return artifactId;
   }
 
   public void setArtifactId(int artifactId) {
-    this.ArtifactId = artifactId;
+    this.artifactId = artifactId;
   }
 
   public int getSubstatId() {
-    return SubstatId;
+    return substatId;
   }
 
   public void setSubstatId(int substatId) {
-    this.SubstatId = substatId;
+    this.substatId = substatId;
   }
 
 
   public double getSubstatValue() {
-    return SubstatValue;
+    return substatValue;
   }
 
   public void setSubstatValue(double substatValue) {
-    this.SubstatValue = substatValue;
+    this.substatValue = substatValue;
   }
 //
 //  public Artifact getArtifact() {

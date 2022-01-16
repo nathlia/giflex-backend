@@ -23,6 +23,8 @@ public class Artifact {
   @Column(name = "mainstatvalue")
   private double MainStatValue;
 
+  //TODO add foreign tables
+
 //  private ArtifactType artifactType;
 //  private ArtifactSetType artifactSetType;
 //  private Substat MainStat;
