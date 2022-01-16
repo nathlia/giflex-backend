@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 //@RequestMapping("character")
 public class CharacterController {
@@ -56,7 +56,7 @@ public class CharacterController {
         }
     }
 
-    @PostMapping("/characters")
+    @PostMapping("/characters/add")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character _character = characterRepository.save(new Character(character.getName(), character.getLevel(), character.getCritRate(), character.getCritDmg()));
         return new ResponseEntity<>(_character, HttpStatus.CREATED);
@@ -89,5 +89,4 @@ public class CharacterController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

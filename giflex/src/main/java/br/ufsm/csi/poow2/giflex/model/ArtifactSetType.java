@@ -8,57 +8,69 @@ public class ArtifactSetType {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int ArtifactSetTypeId;
+  private int artifactSetTypeId;
 
   @Column(name = "name")
-  private String Name;
+  private String name;
 
-  @Column(name = "description")
-  private String Description;
+  @Column(name = "twopieces")
+  private String twopieces;
+
+  @Column(name = "fourpieces")
+  private String fourpieces;
 
   public ArtifactSetType() {
 
   }
 
   public ArtifactSetType(int artifactSetTypeId) {
-    ArtifactSetTypeId = artifactSetTypeId;
+    this.artifactSetTypeId = artifactSetTypeId;
   }
 
-  public ArtifactSetType(String name, String description) {
-    Name = name;
-    Description = description;
+  public ArtifactSetType(String name, String twopieces, String fourpieces) {
+    this.name = name;
+    this.twopieces = twopieces;
+    this.fourpieces = fourpieces;
   }
 
-  public ArtifactSetType(int artifactSetTypeId, String name, String description) {
-    ArtifactSetTypeId = artifactSetTypeId;
-    Name = name;
-    Description = description;
+  public ArtifactSetType(int artifactSetTypeId, String name, String twopieces, String fourpieces) {
+    this.artifactSetTypeId = artifactSetTypeId;
+    this.name = name;
+    this.twopieces = twopieces;
+    this.fourpieces = fourpieces;
   }
 
   public int getArtifactSetTypeId() {
-    return ArtifactSetTypeId;
+    return artifactSetTypeId;
   }
 
   public void setArtifactSetTypeId(int artifactSetTypeId) {
-    this.ArtifactSetTypeId = artifactSetTypeId;
+    this.artifactSetTypeId = artifactSetTypeId;
   }
 
 
   public String getName() {
-    return Name;
+    return name;
   }
 
   public void setName(String name) {
-    this.Name = name;
+    this.name = name;
   }
 
 
-  public String getDescription() {
-    return Description;
+  public String getTwopieces() {
+    return twopieces;
   }
 
-  public void setDescription(String description) {
-    this.Description = description;
+  public void setTwopieces(String twopieces) {
+    this.twopieces = twopieces;
   }
 
+  public String getFourpieces() {
+    return fourpieces;
+  }
+
+  public void setFourpieces(String fourpieces) {
+    this.fourpieces = fourpieces;
+  }
 }
