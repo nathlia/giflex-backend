@@ -8,71 +8,71 @@ public class Player {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int UserId;
+  private int userId;
 
   @Column(name = "username")
-  private String Username;
+  private String username;
 
   @Column(name = "name")
-  private String Name;
+  private String name;
 
   @Column(name = "password")
-  private String Password;
+  private String password;
 
   public Player() {
 
   }
 
   public Player(int userId) {
-    this.UserId= userId;
+    this.userId = userId;
   }
 
   public Player(String Name, String Username, String Password) {
-    this.Name = Name;
-    this.Username = Username;
-    this.Password = Password;
+    this.name = Name;
+    this.username = Username;
+    this.password = Password;
   }
 
   public Player(int UserId, String Name, String Username, String Password) {
-    this.UserId = UserId;
-    this.Name = Name;
-    this.Username = Username;
-    this.Password = Password;
+    this.userId = UserId;
+    this.name = Name;
+    this.username = Username;
+    this.password = Password;
   }
 
   public int getUserId() {
-    return UserId;
+    return userId;
   }
 
   public void setUserId(int userId) {
-    this.UserId = userId;
+    this.userId = userId;
   }
 
 
   public String getName() {
-    return Name;
+    return name;
   }
 
   public void setName(String name) {
-    this.Name = name;
+    this.name = name;
   }
 
 
   public String getUsername() {
-    return Username;
+    return username;
   }
 
   public void setUsername(String username) {
-    this.Username = username;
+    this.username = username;
   }
 
 
   public String getPassword() {
-    return Password;
+    return password;
   }
 
   public void setPassword(String password) {
-    this.Password = password;
+    this.password = password;
   }
 
 }

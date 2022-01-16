@@ -79,7 +79,7 @@ public class CharacterController {
         }
     }
 
-    @DeleteMapping("characters/{id}")
+    @DeleteMapping("/characters/{id}")
     public ResponseEntity<Character> deleteCharacterById(@PathVariable("id") long id) {
 
         try {

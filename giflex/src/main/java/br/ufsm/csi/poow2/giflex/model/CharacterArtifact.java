@@ -16,6 +16,7 @@ public class CharacterArtifact {
   @Column(name = "artifactid")
   private int ArtifactId;
 
+  //TODO add foreign tables
 //  private Character character;
 //  private Artifact artifact;
 

@@ -61,7 +61,7 @@ public class ArtifactSetTypeController {
         return new ResponseEntity<>(_artifactSetType, HttpStatus.CREATED);
     }
 
-    @PutMapping("artifact-set-type/{id}/edit")
+    @PutMapping("/artifact-set-type/{id}/edit")
     public ResponseEntity<ArtifactSetType> editArtifactSetType(@PathVariable("id") int id, @RequestBody ArtifactSetType artifactSetType ) {
         Optional<ArtifactSetType> artifactSetTypeData = artifactSetTypeRepository.findById(id);
 
@@ -77,7 +77,7 @@ public class ArtifactSetTypeController {
         }
     }
 
-    @DeleteMapping("artifact-set-type/{id}")
+    @DeleteMapping("/artifact-set-type/{id}")
     public ResponseEntity<ArtifactSetType> deleteArtifactSetType(@PathVariable("id") int id) {
 
         try {
