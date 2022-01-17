@@ -8,51 +8,52 @@ public class Substat {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int SubstatId;
+  private int substatId;
 
   @Column(name = "name")
-  private String Name;
+  private String name;
 
   @Column(name = "value")
-  private double Value;
+  private double value;
 
   public Substat() {
   }
 
   public Substat(int substatId) {
-    SubstatId = substatId;
+    this.substatId = substatId;
   }
-  public Substat( String name) {
-    Name = name;
+  public Substat( String name, Double value) {
+    this.name = name;
+    this.value = value;
   }
 
   public Substat(int substatId, String name) {
-    SubstatId = substatId;
-    Name = name;
+    this.substatId = substatId;
+    this.name = name;
   }
 
   public int getSubstatId() {
-    return SubstatId;
+    return substatId;
   }
 
   public void setSubstatId(int substatId) {
-    this.SubstatId = substatId;
+    this.substatId = substatId;
   }
 
 
   public String getName() {
-    return Name;
+    return name;
   }
 
   public void setName(String name) {
-    this.Name = name;
+    this.name = name;
   }
 
   public double getValue() {
-    return Value;
+    return value;
   }
 
   public void setValue(double value) {
-    Value = value;
+    this.value = value;
   }
 }
