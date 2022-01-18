@@ -1,9 +1,7 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
-import br.ufsm.csi.poow2.giflex.model.Character;
 import br.ufsm.csi.poow2.giflex.model.Substat;
 import br.ufsm.csi.poow2.giflex.repository.SubstatRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,38 +54,38 @@ public class SubstatController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+//TODO delete comments
 
-    @PostMapping("/substats/add")
-    public ResponseEntity<Substat> addSubstat(@RequestBody Substat substat) {
-        Substat _substat = substatRepository.save(new Substat(
-               substat.getName(), substat.getValue()));
-        return new ResponseEntity<>(_substat, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/substats/{id}/edit")
-    public ResponseEntity<Substat> editSubstat(@PathVariable("id") int id, @RequestBody Substat substat ) {
-        Optional<Substat> substatData =substatRepository.findById(id);
-
-        if (substatData.isPresent()) {
-            Substat  _substat = substatData.get();
-            _substat.setName(substat.getName());
-            _substat.setValue(substat.getValue());
-
-            return new ResponseEntity<>(substatRepository.save( _substat), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @DeleteMapping("/substats/{id}/delete")
-    public ResponseEntity<Substat> deleteSubstatById(@PathVariable("id") int id) {
-
-        try {
-            substatRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("/substats/add")
+//    public ResponseEntity<Substat> addSubstat(@RequestBody Substat substat) {
+//        Substat _substat = substatRepository.save(new Substat(
+//               substat.getName()));
+//        return new ResponseEntity<>(_substat, HttpStatus.CREATED);
+//    }
+//
+//    @PutMapping("/substats/{id}/edit")
+//    public ResponseEntity<Substat> editSubstat(@PathVariable("id") int id, @RequestBody Substat substat ) {
+//        Optional<Substat> substatData =substatRepository.findById(id);
+//
+//        if (substatData.isPresent()) {
+//            Substat  _substat = substatData.get();
+//            _substat.setName(substat.getName());
+//
+//            return new ResponseEntity<>(substatRepository.save( _substat), HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//    @DeleteMapping("/substats/{id}/delete")
+//    public ResponseEntity<Substat> deleteSubstatById(@PathVariable("id") int id) {
+//
+//        try {
+//            substatRepository.deleteById(id);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 }

@@ -8,7 +8,7 @@ public class CharacterArtifact {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int CharacterArtifactId;
+  private int id;
 
   @Column(name = "characterid")
   private int CharacterId;
@@ -24,8 +24,8 @@ public class CharacterArtifact {
 
   }
 
-  public CharacterArtifact(int characterArtifactId) {
-    CharacterArtifactId = characterArtifactId;
+  public CharacterArtifact(int id) {
+    this.id = id;
   }
 
   public CharacterArtifact(int characterId, int artifactId) {
@@ -33,18 +33,18 @@ public class CharacterArtifact {
     ArtifactId = artifactId;
   }
 
-  public CharacterArtifact(int characterArtifactId, int characterId, int artifactId) {
-    CharacterArtifactId = characterArtifactId;
+  public CharacterArtifact(int id, int characterId, int artifactId) {
+    this.id = id;
     CharacterId = characterId;
     ArtifactId = artifactId;
   }
 
-  public int getCharacterArtifactId() {
-    return CharacterArtifactId;
+  public int getId() {
+    return id;
   }
 
-  public void setCharacterArtifactId(int characterArtifactId) {
-    this.CharacterArtifactId = characterArtifactId;
+  public void setId(int id) {
+    this.id = id;
   }
 
 

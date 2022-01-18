@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-//@RequestMapping("character")
 public class CharacterController {
 
     final
@@ -46,7 +45,7 @@ public class CharacterController {
     }
 
     @GetMapping("/characters/{id}")
-    public ResponseEntity<Character> getCharacterById(@PathVariable("id") long id) {
+    public ResponseEntity<Character> getCharacterById(@PathVariable("id") int id) {
         Optional<Character> characterData = characterRepository.findById(id);
 
         if (characterData.isPresent()) {
@@ -56,14 +55,14 @@ public class CharacterController {
         }
     }
 
-    @PostMapping("/characters/add")
+    @PostMapping("/characters")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character _character = characterRepository.save(new Character(character.getName(), character.getLevel(), character.getCritRate(), character.getCritDmg()));
         return new ResponseEntity<>(_character, HttpStatus.CREATED);
     }
 
-    @PutMapping("/characters/{id}/edit")
-    public ResponseEntity<Character> editCharacter(@PathVariable("id") long id, @RequestBody Character character ) {
+    @PutMapping("/characters/{id}")
+    public ResponseEntity<Character> editCharacter(@PathVariable("id") int id, @RequestBody Character character ) {
         Optional<Character> characterData = characterRepository.findById(id);
 
         if (characterData.isPresent()) {
@@ -80,7 +79,7 @@ public class CharacterController {
     }
 
     @DeleteMapping("/characters/{id}")
-    public ResponseEntity<Character> deleteCharacterById(@PathVariable("id") long id) {
+    public ResponseEntity<Character> deleteCharacterById(@PathVariable("id") int id) {
 
         try {
             characterRepository.deleteById(id);

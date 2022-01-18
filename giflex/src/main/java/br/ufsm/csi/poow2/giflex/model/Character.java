@@ -1,6 +1,14 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "character")
@@ -8,7 +16,7 @@ public class Character {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long characterId;
+  private int id;
 
   @Column(name = "name")
   private String name;
@@ -22,12 +30,21 @@ public class Character {
   @Column(name = "critdmg")
   private String critDmg;
 
+//  @ManyToMany(mappedBy = "addedCharacters")
+//  @JoinTable(
+//          name = "usercharacter",
+//          joinColumns = @JoinColumn(name = "playerid", referencedColumnName = "id"),
+//          inverseJoinColumns = @JoinColumn(name = "characterid", referencedColumnName = "id")
+//  )
+
+//  private Set<Player> players = new HashSet<>();
+
   public Character() {
 
   }
 
-  public Character(Long CharacterId) {
-    this.characterId = CharacterId;
+  public Character(int id) {
+    this.id = id;
   }
 
   public Character(String name, String level, String critRate, String critDmg) {
@@ -37,20 +54,20 @@ public class Character {
     this.critDmg = critDmg;
   }
 
-  public Character(Long characterId, String name, String level, String critRate, String critDmg) {
-    this.characterId = characterId;
+  public Character(int id, String name, String level, String critRate, String critDmg) {
+    this.id = id;
     this.name = name;
     this.level = level;
     this.critRate = critRate;
     this.critDmg = critDmg;
   }
 
-  public Long getCharacterId() {
-    return characterId;
+  public int getId() {
+    return id;
   }
 
-  public void setCharacterId(Long characterId) {
-    this.characterId = characterId;
+  public void setId(int characterId) {
+    this.id = characterId;
   }
 
 
@@ -89,4 +106,11 @@ public class Character {
     this.critDmg = critDmg;
   }
 
+//  public Set<Player> getCharacters() {
+//    return players;
+//  }
+//
+//  public void setCharacters(Set<Player> characters) {
+//    this.players = characters;
+//  }
 }

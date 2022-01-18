@@ -49,14 +49,14 @@ public class PlayerController {
         }
     }
 
-    @PostMapping("/users/add")
+    @PostMapping("/users")
     public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
         Player _player = playerRepository.save(new Player
                 ( player.getUsername(), player.getName(), player.getPassword()));
         return new ResponseEntity<>(_player, HttpStatus.CREATED);
     }
 
-    @PutMapping("/users/{id}/edit")
+    @PutMapping("/users/{id}")
     public ResponseEntity<Player> editUser(@PathVariable("id") int id, @RequestBody Player player ) {
         Optional<Player> playerData = playerRepository.findById(id);
 
@@ -72,7 +72,7 @@ public class PlayerController {
         }
     }
 
-    @DeleteMapping("/users/{id}/delete")
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<Player> deleteUserById(@PathVariable("id") int id) {
 
         try {

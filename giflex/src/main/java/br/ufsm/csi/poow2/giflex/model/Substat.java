@@ -1,6 +1,9 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "substat")
@@ -8,36 +11,36 @@ public class Substat {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int substatId;
+  private int id;
 
   @Column(name = "name")
   private String name;
 
-  @Column(name = "value")
-  private double value;
+  @OneToMany(mappedBy = "mainstat")
+  @JsonIgnore
+  private Set<Artifact> artifacts;
 
   public Substat() {
   }
 
-  public Substat(int substatId) {
-    this.substatId = substatId;
+  public Substat(int id) {
+    this.id = id;
   }
-  public Substat( String name, Double value) {
-    this.name = name;
-    this.value = value;
-  }
-
-  public Substat(int substatId, String name) {
-    this.substatId = substatId;
+  public Substat( String name) {
     this.name = name;
   }
 
-  public int getSubstatId() {
-    return substatId;
+  public Substat(int id, String name) {
+    this.id = id;
+    this.name = name;
   }
 
-  public void setSubstatId(int substatId) {
-    this.substatId = substatId;
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int substatId) {
+    this.id = substatId;
   }
 
 
@@ -49,11 +52,13 @@ public class Substat {
     this.name = name;
   }
 
-  public double getValue() {
-    return value;
+  @JsonIgnore
+  public Set<Artifact> getArtifacts() {
+    return artifacts;
   }
 
-  public void setValue(double value) {
-    this.value = value;
+  @JsonIgnore
+  public void setArtifacts(Set<Artifact> artifacts) {
+    this.artifacts = artifacts;
   }
 }

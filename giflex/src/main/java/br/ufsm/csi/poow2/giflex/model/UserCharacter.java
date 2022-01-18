@@ -8,13 +8,15 @@ public class UserCharacter {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int UserCharacterId;
+  private int id;
 
   @Column(name = "playerid")
-  private int PlayerId;
+  private int playerId;
 
   @Column(name = "characterid")
-  private int CharacterId;
+  private int characterId;
+
+//TODO add foreign tables
 
 //  private Player player;
 //  private Character character;
@@ -23,45 +25,45 @@ public class UserCharacter {
 
   }
 
-  public UserCharacter(int userCharacterId) {
-    UserCharacterId = userCharacterId;
+  public UserCharacter(int id) {
+    this.id = id;
   }
 
   public UserCharacter( int characterId, int playerId) {
-    CharacterId = characterId;
-    PlayerId = playerId;
+    this.characterId = characterId;
+    this.playerId = playerId;
   }
 
-  public UserCharacter(int userCharacterId, int characterId, int playerId) {
-    UserCharacterId = userCharacterId;
-    PlayerId = playerId;
-    CharacterId = characterId;
+  public UserCharacter(int id, int characterId, int playerId) {
+    this.id = id;
+    this.playerId = playerId;
+    this.characterId = characterId;
   }
 
-  public int getUserCharacterId() {
-    return UserCharacterId;
+  public int getId() {
+    return id;
   }
 
-  public void setUserCharacterId(int userCharacterId) {
-    this.UserCharacterId = userCharacterId;
+  public void setId(int userCharacterId) {
+    this.id = userCharacterId;
   }
 
 
   public int getPlayerId() {
-    return PlayerId;
+    return playerId;
   }
 
   public void setPlayerId(int playerId) {
-    this.PlayerId = playerId;
+    this.playerId = playerId;
   }
 
 
   public int getCharacterId() {
-    return CharacterId;
+    return characterId;
   }
 
   public void setCharacterId(int characterId) {
-    this.CharacterId = characterId;
+    this.characterId = characterId;
   }
 
 //  public Player getPlayer() {

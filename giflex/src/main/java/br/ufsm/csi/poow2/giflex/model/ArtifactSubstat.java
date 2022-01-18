@@ -1,8 +1,6 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 
-import com.sun.xml.bind.v2.TODO;
-
 import javax.persistence.*;
 
 
@@ -12,7 +10,7 @@ public class ArtifactSubstat {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int artifactSubstatId;
+  private int id;
 
   private int artifactId;
 
@@ -31,8 +29,8 @@ public class ArtifactSubstat {
 
   }
 
-  public ArtifactSubstat(int artifactSubstatId) {
-    this.artifactSubstatId = artifactSubstatId;
+  public ArtifactSubstat(int id) {
+    this.id = id;
   }
 
   public ArtifactSubstat(int artifactId, int substatId, double substatValue) {
@@ -41,19 +39,19 @@ public class ArtifactSubstat {
     this.substatValue = substatValue;
   }
 
-  public ArtifactSubstat(int artifactSubstatId, int artifactId, int substatId, double substatValue) {
-    this.artifactSubstatId = artifactSubstatId;
+  public ArtifactSubstat(int id, int artifactId, int substatId, double substatValue) {
+    this.id = id;
     this.artifactId = artifactId;
     this.substatId = substatId;
     this.substatValue = substatValue;
   }
 
-  public int getArtifactSubstatId() {
-    return artifactSubstatId;
+  public int getId() {
+    return id;
   }
 
-  public void setArtifactSubstatId(int artifactSubstatId) {
-    this.artifactSubstatId = artifactSubstatId;
+  public void setId(int artifactSubstatId) {
+    this.id = artifactSubstatId;
   }
 
   public int getArtifactId() {

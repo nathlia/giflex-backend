@@ -1,6 +1,9 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "player")
@@ -8,7 +11,7 @@ public class Player {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int userId;
+  private int id;
 
   @Column(name = "username")
   private String username;
@@ -19,33 +22,31 @@ public class Player {
   @Column(name = "password")
   private String password;
 
+//  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//  @JoinTable(
+//          name = "usercharacter",
+//          joinColumns = @JoinColumn(name = "playerid", referencedColumnName = "id"),
+//          inverseJoinColumns = @JoinColumn(name = "characterid", referencedColumnName = "id")
+//  )
+//
+//  private Set<Character> addedCharacters = new HashSet<>();
+
   public Player() {
 
   }
 
-  public Player(int userId) {
-    this.userId = userId;
+  public Player(String name, String username, String password) {
+    this.name = name;
+    this.username = username;
+    this.password = password;
   }
 
-  public Player(String Name, String Username, String Password) {
-    this.name = Name;
-    this.username = Username;
-    this.password = Password;
+  public int getId() {
+    return id;
   }
 
-  public Player(int UserId, String Name, String Username, String Password) {
-    this.userId = UserId;
-    this.name = Name;
-    this.username = Username;
-    this.password = Password;
-  }
-
-  public int getUserId() {
-    return userId;
-  }
-
-  public void setUserId(int userId) {
-    this.userId = userId;
+  public void setId(int userId) {
+    this.id = userId;
   }
 
 
@@ -75,4 +76,11 @@ public class Player {
     this.password = password;
   }
 
+//  public Set<Character> getCharacters() {
+//    return addedCharacters;
+//  }
+//
+//  public void setCharacters(Set<Character> addedCharacters) {
+//    this.addedCharacters = addedCharacters;
+//  }
 }

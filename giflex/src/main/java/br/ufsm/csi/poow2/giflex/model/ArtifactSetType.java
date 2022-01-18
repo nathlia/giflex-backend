@@ -1,6 +1,9 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "artifactsettype")
@@ -8,7 +11,7 @@ public class ArtifactSetType {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int artifactSetTypeId;
+  private int id;
 
   @Column(name = "name")
   private String name;
@@ -19,12 +22,16 @@ public class ArtifactSetType {
   @Column(name = "fourpieces")
   private String fourpieces;
 
+  @OneToMany(mappedBy = "artifactSetType")
+  @JsonIgnore
+  private Set<Artifact> artifacts;
+
   public ArtifactSetType() {
 
   }
 
-  public ArtifactSetType(int artifactSetTypeId) {
-    this.artifactSetTypeId = artifactSetTypeId;
+  public ArtifactSetType(int id) {
+    this.id = id;
   }
 
   public ArtifactSetType(String name, String twopieces, String fourpieces) {
@@ -33,19 +40,19 @@ public class ArtifactSetType {
     this.fourpieces = fourpieces;
   }
 
-  public ArtifactSetType(int artifactSetTypeId, String name, String twopieces, String fourpieces) {
-    this.artifactSetTypeId = artifactSetTypeId;
+  public ArtifactSetType(int id, String name, String twopieces, String fourpieces) {
+    this.id = id;
     this.name = name;
     this.twopieces = twopieces;
     this.fourpieces = fourpieces;
   }
 
-  public int getArtifactSetTypeId() {
-    return artifactSetTypeId;
+  public int getId() {
+    return id;
   }
 
-  public void setArtifactSetTypeId(int artifactSetTypeId) {
-    this.artifactSetTypeId = artifactSetTypeId;
+  public void setId(int artifactSetTypeId) {
+    this.id = artifactSetTypeId;
   }
 
 
@@ -56,7 +63,6 @@ public class ArtifactSetType {
   public void setName(String name) {
     this.name = name;
   }
-
 
   public String getTwopieces() {
     return twopieces;
@@ -72,5 +78,15 @@ public class ArtifactSetType {
 
   public void setFourpieces(String fourpieces) {
     this.fourpieces = fourpieces;
+  }
+
+  @JsonIgnore
+  public Set<Artifact> getArtifacts() {
+    return artifacts;
+  }
+
+  @JsonIgnore
+  public void setArtifacts(Set<Artifact> artifacts) {
+    this.artifacts = artifacts;
   }
 }
