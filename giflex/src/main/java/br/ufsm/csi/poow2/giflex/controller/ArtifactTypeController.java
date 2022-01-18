@@ -21,7 +21,7 @@ public class ArtifactTypeController {
         this.artifactTypeRepository = artifactTypeRepository;
     }
 
-    @GetMapping("/artifact-type")
+    @GetMapping("/artifact-types")
     public ResponseEntity<List<ArtifactType>> getAllArtifactTypes(@RequestParam(required = false) String name ) {
         try {
             List<ArtifactType> artifactTypes = new ArrayList<ArtifactType>();
@@ -44,7 +44,7 @@ public class ArtifactTypeController {
         }
     }
 
-    @GetMapping("/artifact-type/{id}")
+    @GetMapping("/artifact-types/{id}")
     public ResponseEntity<ArtifactType> getArtifactTypeById(@PathVariable("id") int id) {
         Optional<ArtifactType> artifactTypeData = artifactTypeRepository.findById(id);
 

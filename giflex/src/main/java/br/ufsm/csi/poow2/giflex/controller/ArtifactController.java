@@ -55,11 +55,11 @@ public class ArtifactController {
         return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
     }
 
-    @PutMapping("/artifacts/{artifactId}")
+    @PutMapping("/artifacts/{id}")
     public ResponseEntity<Artifact> editArtifact(
-            @PathVariable("artifactId") int artifactId,
+            @PathVariable("id") int id,
             @RequestBody Artifact artifact ) {
-        Optional<Artifact> artifactData = artifactRepository.findById(artifactId);
+        Optional<Artifact> artifactData = artifactRepository.findById(id);
 
         if (artifactData.isPresent()) {
             Artifact _artifact = artifactData.get();
@@ -81,5 +81,4 @@ public class ArtifactController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

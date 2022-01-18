@@ -54,38 +54,4 @@ public class SubstatController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-//TODO delete comments
-
-//    @PostMapping("/substats/add")
-//    public ResponseEntity<Substat> addSubstat(@RequestBody Substat substat) {
-//        Substat _substat = substatRepository.save(new Substat(
-//               substat.getName()));
-//        return new ResponseEntity<>(_substat, HttpStatus.CREATED);
-//    }
-//
-//    @PutMapping("/substats/{id}/edit")
-//    public ResponseEntity<Substat> editSubstat(@PathVariable("id") int id, @RequestBody Substat substat ) {
-//        Optional<Substat> substatData =substatRepository.findById(id);
-//
-//        if (substatData.isPresent()) {
-//            Substat  _substat = substatData.get();
-//            _substat.setName(substat.getName());
-//
-//            return new ResponseEntity<>(substatRepository.save( _substat), HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
-//
-//    @DeleteMapping("/substats/{id}/delete")
-//    public ResponseEntity<Substat> deleteSubstatById(@PathVariable("id") int id) {
-//
-//        try {
-//            substatRepository.deleteById(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
 }
