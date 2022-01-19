@@ -24,7 +24,7 @@ public class ArtifactController {
     @GetMapping("/artifacts")
     public ResponseEntity<List<Artifact>> getAllArtifacts() {
         try {
-            List<Artifact> artifacts = new ArrayList<Artifact>(artifactRepository.findAll());
+            List<Artifact> artifacts = new ArrayList<>(artifactRepository.findAll());
 
             if (artifacts.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,7 +58,9 @@ public class ArtifactController {
                 artifact.getArtifactType(),
                 artifact.getArtifactSetType(),
                 artifact.getMainstat(),
-                artifact.getSubstats()));
+                artifact.getSubstats(),
+                artifact.getCharacters()
+        ));
         return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
     }
 
@@ -77,6 +79,7 @@ public class ArtifactController {
             _artifact.setMainstat(artifact.getMainstat());
             _artifact.setMainStatValue(artifact.getMainStatValue());
             _artifact.setSubstats(artifact.getSubstats());
+            _artifact.setCharacters(artifact.getCharacters());
 
             return new ResponseEntity<>(artifactRepository.save(_artifact), HttpStatus.OK);
         } else {

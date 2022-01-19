@@ -1,5 +1,7 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,6 +41,10 @@ public class Artifact {
 
     private Set<Substat> substats = new HashSet<>();
 
+    @ManyToMany(mappedBy = "artifacts", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<Character> characters;
+
     public Set<Substat> getSubstats() {
         return this.substats;
     }
@@ -51,16 +57,13 @@ public class Artifact {
 
     }
 
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<Substat> substats) {
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<Substat> substats, Set<Character> characters) {
         this.mainStatValue = mainStatValue;
         this.artifactType = artifactType;
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
         this.substats = substats;
-    }
-
-    public Artifact(double mainStatValue) {
-        this.mainStatValue = mainStatValue;
+        this.characters = characters;
     }
 
     public int getId() {
@@ -101,5 +104,13 @@ public class Artifact {
 
     public void setMainstat(Substat mainstat) {
         this.mainstat = mainstat;
+    }
+
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
     }
 }

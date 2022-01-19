@@ -1,13 +1,7 @@
 package br.ufsm.csi.poow2.giflex.model;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -30,36 +24,33 @@ public class Character {
   @Column(name = "critdmg")
   private String critDmg;
 
-//  @ManyToMany(mappedBy = "addedCharacters")
-//  @JoinTable(
-//          name = "usercharacter",
-//          joinColumns = @JoinColumn(name = "playerid", referencedColumnName = "id"),
-//          inverseJoinColumns = @JoinColumn(name = "characterid", referencedColumnName = "id")
-//  )
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinTable(
+          name = "character_artifact",
+          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id")
+  )
 
-//  private Set<Player> players = new HashSet<>();
+  private Set<Artifact> artifacts = new HashSet<>();
+
+  public Set<Artifact> getArtifacts() {
+    return artifacts;
+  }
+
+  public void setArtifacts(Set<Artifact> artifacts) {
+    this.artifacts = artifacts;
+  }
 
   public Character() {
 
   }
 
-  public Character(int id) {
-    this.id = id;
-  }
-
-  public Character(String name, String level, String critRate, String critDmg) {
+  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> artifacts) {
     this.name = name;
     this.level = level;
     this.critRate = critRate;
     this.critDmg = critDmg;
-  }
-
-  public Character(int id, String name, String level, String critRate, String critDmg) {
-    this.id = id;
-    this.name = name;
-    this.level = level;
-    this.critRate = critRate;
-    this.critDmg = critDmg;
+    this.artifacts = artifacts;
   }
 
   public int getId() {
@@ -106,11 +97,4 @@ public class Character {
     this.critDmg = critDmg;
   }
 
-//  public Set<Player> getCharacters() {
-//    return players;
-//  }
-//
-//  public void setCharacters(Set<Player> characters) {
-//    this.players = characters;
-//  }
 }

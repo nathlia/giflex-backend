@@ -3,18 +3,18 @@ package br.ufsm.csi.poow2.giflex.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "characterartifact")
+@Table(name = "character_artifact")
 public class CharacterArtifact {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
-  @Column(name = "characterid")
-  private int CharacterId;
+  @Column(name = "character_id")
+  private int characterId;
 
-  @Column(name = "artifactid")
-  private int ArtifactId;
+  @Column(name = "artifact_id")
+  private int artifactId;
 
   //TODO add foreign tables
 //  private Character character;
@@ -29,14 +29,14 @@ public class CharacterArtifact {
   }
 
   public CharacterArtifact(int characterId, int artifactId) {
-    CharacterId = characterId;
-    ArtifactId = artifactId;
+    this.characterId = characterId;
+    this.artifactId = artifactId;
   }
 
   public CharacterArtifact(int id, int characterId, int artifactId) {
     this.id = id;
-    CharacterId = characterId;
-    ArtifactId = artifactId;
+    this.characterId = characterId;
+    this.artifactId = artifactId;
   }
 
   public int getId() {
@@ -49,20 +49,20 @@ public class CharacterArtifact {
 
 
   public int getCharacterId() {
-    return CharacterId;
+    return characterId;
   }
 
   public void setCharacterId(int characterId) {
-    this.CharacterId = characterId;
+    this.characterId = characterId;
   }
 
 
   public int getArtifactId() {
-    return ArtifactId;
+    return artifactId;
   }
 
   public void setArtifactId(int artifactId) {
-    this.ArtifactId = artifactId;
+    this.artifactId = artifactId;
   }
 
 //  public Character getCharacter() {
