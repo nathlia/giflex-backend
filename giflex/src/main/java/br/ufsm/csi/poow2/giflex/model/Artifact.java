@@ -1,6 +1,8 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "artifact")
@@ -13,8 +15,8 @@ public class Artifact {
     @Column(name = "mainstatvalue")
     private double mainStatValue;
 
-    //TODO add foreign tables
-    @ManyToOne()
+    //TODO POST and PUT
+    @ManyToOne
     @JoinColumn(name = "artifacttypeid", referencedColumnName = "id")
     private ArtifactType artifactType;
 
@@ -26,12 +28,35 @@ public class Artifact {
     @JoinColumn(name = "mainstatid", referencedColumnName = "id")
     private Substat mainstat;
 
-    //TODO add substats
-//  private Substat MainStat; one to many
-//  private ArrayList<Substat> Substats; many to many
+    //TODO get substat value
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "artifact_substat",
+            joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id")
+    )
+
+    private Set<Substat> substats = new HashSet<>();
+
+    public Set<Substat> getSubstats() {
+        return this.substats;
+    }
+
+    public void setSubstats(Set<Substat> substats) {
+        this.substats = substats;
+    }
+//
     public Artifact() {
 
+    }
+
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<Substat> substats) {
+        this.mainStatValue = mainStatValue;
+        this.artifactType = artifactType;
+        this.artifactSetType = artifactSetType;
+        this.mainstat = mainstat;
+        this.substats = substats;
     }
 
     public Artifact(double mainStatValue) {
@@ -54,27 +79,27 @@ public class Artifact {
         this.mainStatValue = mainStatValue;
     }
 
-  public ArtifactType getArtifactType() {
-    return artifactType;
-  }
+    public ArtifactType getArtifactType() {
+        return artifactType;
+    }
 
-  public void setArtifactType(ArtifactType artifactType) {
-    this.artifactType = artifactType;
-  }
+    public void setArtifactType(ArtifactType artifactType) {
+        this.artifactType = artifactType;
+    }
 
-  public ArtifactSetType getArtifactSetType() {
-    return artifactSetType;
-  }
+    public ArtifactSetType getArtifactSetType() {
+        return artifactSetType;
+    }
 
-  public void setArtifactSetType(ArtifactSetType artifactSetType) {
-    this.artifactSetType = artifactSetType;
-  }
+    public void setArtifactSetType(ArtifactSetType artifactSetType) {
+        this.artifactSetType = artifactSetType;
+    }
 
-  public Substat getSubstat() {
-    return mainstat;
-  }
+    public Substat getMainstat() {
+        return mainstat;
+    }
 
-  public void setSubstat(Substat mainstat) {
-    this.mainstat = mainstat;
-  }
+    public void setMainstat(Substat mainstat) {
+        this.mainstat = mainstat;
+    }
 }

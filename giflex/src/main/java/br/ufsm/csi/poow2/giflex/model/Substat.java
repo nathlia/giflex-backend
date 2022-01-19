@@ -16,6 +16,8 @@ public class Substat {
   @Column(name = "name")
   private String name;
 
+  private Double value;
+
   @OneToMany(mappedBy = "mainstat")
   @JsonIgnore
   private Set<Artifact> artifacts;
@@ -52,6 +54,14 @@ public class Substat {
     this.name = name;
   }
 
+  public Double getValue() {
+    return value;
+  }
+
+  public void setValue(Double value) {
+    this.value = value;
+  }
+
   @JsonIgnore
   public Set<Artifact> getArtifacts() {
     return artifacts;
@@ -61,4 +71,5 @@ public class Substat {
   public void setArtifacts(Set<Artifact> artifacts) {
     this.artifacts = artifacts;
   }
+
 }
