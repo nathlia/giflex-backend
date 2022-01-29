@@ -16,11 +16,26 @@ public class Substat {
   @Column(name = "name")
   private String name;
 
-  private Double value;
-
   @OneToMany(mappedBy = "mainstat")
   @JsonIgnore
   private Set<Artifact> artifacts;
+
+  @OneToMany(mappedBy = "substat")
+  private Set<ArtifactSubstat> artifactSubstats;
+
+  public Set<ArtifactSubstat> getArtifactSubstats() {
+    return artifactSubstats;
+  }
+
+  public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
+    this.artifactSubstats = artifactSubstats;
+  }
+
+  public Substat(String name, Set<Artifact> artifacts, Set<ArtifactSubstat> artifactSubstats) {
+    this.name = name;
+    this.artifacts = artifacts;
+    this.artifactSubstats = artifactSubstats;
+  }
 
   public Substat() {
   }
@@ -52,14 +67,6 @@ public class Substat {
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  public Double getValue() {
-    return value;
-  }
-
-  public void setValue(Double value) {
-    this.value = value;
   }
 
   @JsonIgnore

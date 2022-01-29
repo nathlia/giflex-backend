@@ -3,22 +3,23 @@ package br.ufsm.csi.poow2.giflex.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "characterartifact")
+@Table(name = "character_artifact")
 public class CharacterArtifact {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
-  @Column(name = "characterid")
+  @Column(name = "character_id")
   private int CharacterId;
 
-  @Column(name = "artifactid")
+  @Column(name = "artifact_id")
   private int ArtifactId;
 
   //TODO add foreign tables
-//  private Character character;
-//  private Artifact artifact;
+
+ // private Character character;
+ // private Artifact artifact;
 
   public CharacterArtifact() {
 

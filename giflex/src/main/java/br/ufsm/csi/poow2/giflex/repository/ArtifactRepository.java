@@ -1,6 +1,7 @@
 package br.ufsm.csi.poow2.giflex.repository;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
+import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.model.Substat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,11 +13,11 @@ public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
     Double getArtifactValue(int idA, int idS);
 
     public default void getSubstatValue(Artifact artifact) {
-        for (Substat substat : artifact.getSubstats()) {
-
-            double value = getArtifactValue(artifact.getId(), substat.getId());
-            substat.setValue(value);
-        }
+//        for (ArtifactSubstat substat : artifact.getSubstats()) {
+//
+//            double value = getArtifactValue(artifact.getId(), substat.getId());
+//            substat.setSubstatValue(value);
+//        }
     }
 
 }

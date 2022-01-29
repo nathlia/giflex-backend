@@ -42,7 +42,7 @@ public class ArtifactController {
         Optional<Artifact> artifactData = artifactRepository.findById(id);
 
         if (artifactData.isPresent()) {
-            artifactRepository.getSubstatValue(artifactData.get());
+            //artifactRepository.getSubstatValue(artifactData.get());
             return new ResponseEntity<>(artifactData.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -57,8 +57,10 @@ public class ArtifactController {
                 artifact.getMainStatValue(),
                 artifact.getArtifactType(),
                 artifact.getArtifactSetType(),
-                artifact.getMainstat(),
-                artifact.getSubstats()));
+                artifact.getMainstat()
+                //artifact.getSubstats()
+
+        ));
         return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
     }
 
@@ -69,14 +71,14 @@ public class ArtifactController {
         Optional<Artifact> artifactData = artifactRepository.findById(id);
 
         if (artifactData.isPresent()) {
-            artifactRepository.getSubstatValue(artifactData.get());
+           // artifactRepository.getSubstatValue(artifactData.get());
             Artifact _artifact = artifactData.get();
             _artifact.setMainStatValue(artifact.getMainStatValue());
             _artifact.setArtifactType(artifact.getArtifactType());
             _artifact.setArtifactSetType(artifact.getArtifactSetType());
             _artifact.setMainstat(artifact.getMainstat());
             _artifact.setMainStatValue(artifact.getMainStatValue());
-            _artifact.setSubstats(artifact.getSubstats());
+            //_artifact.setSubstats(artifact.getSubstats());
 
             return new ResponseEntity<>(artifactRepository.save(_artifact), HttpStatus.OK);
         } else {

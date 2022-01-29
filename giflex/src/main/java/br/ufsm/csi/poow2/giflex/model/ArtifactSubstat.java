@@ -1,14 +1,25 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 import javax.persistence.*;
+import java.text.Format;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "artifact_substat")
 public class ArtifactSubstat {
 
-    @Id
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private ArtifactSubstatId id = new ArtifactSubstatId();
+
+    @ManyToOne
+    @MapsId("artifact")
+    private Artifact artifact;
+
+    @ManyToOne
+    @MapsId("substat")
+    private Substat substat;
 
     @Column(name = "substatvalue")
     private double substatValue;
@@ -17,26 +28,35 @@ public class ArtifactSubstat {
 
     }
 
-    public ArtifactSubstat(int id) {
+    public ArtifactSubstat(ArtifactSubstatId id, Artifact artifact, Substat substat, double substatValue) {
         this.id = id;
-    }
-
-    public ArtifactSubstat(double substatValue) {
-
+        this.artifact = artifact;
+        this.substat = substat;
         this.substatValue = substatValue;
     }
 
-    public ArtifactSubstat(int id, double substatValue) {
-        this.id = id;
-        this.substatValue = substatValue;
-    }
-
-    public int getId() {
+    public ArtifactSubstatId getId() {
         return id;
     }
 
-    public void setId(int artifactSubstatId) {
-        this.id = artifactSubstatId;
+    public void setId(ArtifactSubstatId id) {
+        this.id = id;
+    }
+
+    public Artifact getArtifact() {
+        return artifact;
+    }
+
+    public void setArtifact(Artifact artifact) {
+        this.artifact = artifact;
+    }
+
+    public Substat getSubstat() {
+        return substat;
+    }
+
+    public void setSubstat(Substat substat) {
+        this.substat = substat;
     }
 
     public double getSubstatValue() {
