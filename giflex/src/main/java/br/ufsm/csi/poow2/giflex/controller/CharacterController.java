@@ -24,7 +24,7 @@ public class CharacterController {
     @GetMapping("/characters")
     public ResponseEntity<List<Character>> getAllCharacters(@RequestParam(required = false) String name ) {
         try {
-            List<Character> characters = new ArrayList<Character>();
+            List<Character> characters = new ArrayList<>();
 
             if (name == null) {
                 characters.addAll(characterRepository.findAll());
@@ -48,16 +48,18 @@ public class CharacterController {
     public ResponseEntity<Character> getCharacterById(@PathVariable("id") int id) {
         Optional<Character> characterData = characterRepository.findById(id);
 
-        if (characterData.isPresent()) {
-            return new ResponseEntity<>(characterData.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return characterData.map(character -> new ResponseEntity<>(character, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/characters")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
-        Character _character = characterRepository.save(new Character(character.getName(), character.getLevel(), character.getCritRate(), character.getCritDmg()));
+        Character _character = characterRepository.save(new Character(
+                character.getName(),
+                character.getLevel(),
+                character.getCritRate(),
+                character.getCritDmg(),
+                character.getArtifacts()
+        ));
         return new ResponseEntity<>(_character, HttpStatus.CREATED);
     }
 
@@ -71,6 +73,7 @@ public class CharacterController {
             _character.setLevel(character.getLevel());
             _character.setCritRate(character.getCritRate());
             _character.setCritDmg(character.getCritDmg());
+            _character.setArtifacts(character.getArtifacts());
 
             return new ResponseEntity<>(characterRepository.save(_character), HttpStatus.OK);
         } else {
