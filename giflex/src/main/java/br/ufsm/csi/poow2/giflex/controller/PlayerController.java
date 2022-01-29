@@ -1,6 +1,5 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
-import br.ufsm.csi.poow2.giflex.model.Character;
 import br.ufsm.csi.poow2.giflex.model.Player;
 import br.ufsm.csi.poow2.giflex.repository.PlayerRepository;
 import org.springframework.http.HttpStatus;

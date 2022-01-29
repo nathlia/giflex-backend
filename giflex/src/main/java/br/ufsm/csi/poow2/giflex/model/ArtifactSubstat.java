@@ -1,9 +1,8 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.text.Format;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "artifact_substat")
@@ -11,10 +10,12 @@ public class ArtifactSubstat {
 
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private ArtifactSubstatId id = new ArtifactSubstatId();
 
     @ManyToOne
     @MapsId("artifact")
+    @JsonIgnore
     private Artifact artifact;
 
     @ManyToOne
@@ -43,10 +44,12 @@ public class ArtifactSubstat {
         this.id = id;
     }
 
+    @JsonIgnore
     public Artifact getArtifact() {
         return artifact;
     }
 
+    @JsonIgnore
     public void setArtifact(Artifact artifact) {
         this.artifact = artifact;
     }

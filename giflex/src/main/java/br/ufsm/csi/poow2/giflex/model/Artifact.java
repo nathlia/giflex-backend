@@ -49,33 +49,16 @@ public class Artifact {
     @OneToMany(mappedBy = "artifact")
     private Set<ArtifactSubstat> artifactSubstats;
 
-    public Set<ArtifactSubstat> getArtifactSubstats() {
-        return artifactSubstats;
-    }
-
-    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
-        this.artifactSubstats = artifactSubstats;
-    }
-
-
-
     public Artifact() {
 
     }
 
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> substats) {
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> artifactSubstats) {
         this.mainStatValue = mainStatValue;
         this.artifactType = artifactType;
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
-        //this.substats = substats;
-    }
-
-    public Artifact(double mainStatValue) {
-        this.mainStatValue = mainStatValue;
-    }
-
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat) {
+        this.artifactSubstats = artifactSubstats;
     }
 
     public int getId() {
@@ -116,5 +99,13 @@ public class Artifact {
 
     public void setMainstat(Substat mainstat) {
         this.mainstat = mainstat;
+    }
+
+    public Set<ArtifactSubstat> getArtifactSubstats() {
+        return artifactSubstats;
+    }
+
+    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
+        this.artifactSubstats = artifactSubstats;
     }
 }

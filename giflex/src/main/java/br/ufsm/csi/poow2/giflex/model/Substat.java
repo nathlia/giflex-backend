@@ -9,74 +9,65 @@ import java.util.Set;
 @Table(name = "substat")
 public class Substat {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-  @Column(name = "name")
-  private String name;
+    @Column(name = "name")
+    private String name;
 
-  @OneToMany(mappedBy = "mainstat")
-  @JsonIgnore
-  private Set<Artifact> artifacts;
+    @OneToMany(mappedBy = "mainstat")
+    @JsonIgnore
+    private Set<Artifact> artifacts;
 
-  @OneToMany(mappedBy = "substat")
-  private Set<ArtifactSubstat> artifactSubstats;
+    @OneToMany(mappedBy = "substat")
+    @JsonIgnore
+    private Set<ArtifactSubstat> artifactSubstats;
 
-  public Set<ArtifactSubstat> getArtifactSubstats() {
-    return artifactSubstats;
-  }
+    public Substat() {
+    }
 
-  public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
-    this.artifactSubstats = artifactSubstats;
-  }
+    public Substat(String name, Set<Artifact> artifacts, Set<ArtifactSubstat> artifactSubstats) {
+        this.name = name;
+        this.artifacts = artifacts;
+        this.artifactSubstats = artifactSubstats;
+    }
 
-  public Substat(String name, Set<Artifact> artifacts, Set<ArtifactSubstat> artifactSubstats) {
-    this.name = name;
-    this.artifacts = artifacts;
-    this.artifactSubstats = artifactSubstats;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public Substat() {
-  }
-
-  public Substat(int id) {
-    this.id = id;
-  }
-  public Substat( String name) {
-    this.name = name;
-  }
-
-  public Substat(int id, String name) {
-    this.id = id;
-    this.name = name;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int substatId) {
-    this.id = substatId;
-  }
+    public void setId(int substatId) {
+        this.id = substatId;
+    }
 
 
-  public String getName() {
-    return name;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  @JsonIgnore
-  public Set<Artifact> getArtifacts() {
-    return artifacts;
-  }
+    @JsonIgnore
+    public Set<Artifact> getArtifacts() {
+        return artifacts;
+    }
 
-  @JsonIgnore
-  public void setArtifacts(Set<Artifact> artifacts) {
-    this.artifacts = artifacts;
-  }
+    @JsonIgnore
+    public void setArtifacts(Set<Artifact> artifacts) {
+        this.artifacts = artifacts;
+    }
 
+
+    @JsonIgnore
+    public Set<ArtifactSubstat> getArtifactSubstats() {
+        return artifactSubstats;
+    }
+
+    @JsonIgnore
+    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
+        this.artifactSubstats = artifactSubstats;
+    }
 }
