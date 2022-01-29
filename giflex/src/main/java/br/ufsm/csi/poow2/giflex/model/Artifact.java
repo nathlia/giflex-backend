@@ -1,7 +1,6 @@
 package br.ufsm.csi.poow2.giflex.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,38 +28,54 @@ public class Artifact {
     private Substat mainstat;
 
     //TODO get substat value
-
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "artifact_substat",
-            joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id")
-    )
-
-    private Set<Substat> substats = new HashSet<>();
-
-    public Set<Substat> getSubstats() {
-        return this.substats;
-    }
-
-    public void setSubstats(Set<Substat> substats) {
-        this.substats = substats;
-    }
 //
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "artifact_substat",
+//            joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id")
+//    )
+//
+//    private Set<Substat> substats = new HashSet<Substat>();
+//
+//    public Set<Substat> getSubstats() {
+//        return this.substats;
+//    }
+//
+//    public void setSubstats(Set<Substat> substats) {
+//        this.substats = substats;
+//    }
+
+    @OneToMany(mappedBy = "artifact")
+    private Set<ArtifactSubstat> artifactSubstats;
+
+    public Set<ArtifactSubstat> getArtifactSubstats() {
+        return artifactSubstats;
+    }
+
+    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
+        this.artifactSubstats = artifactSubstats;
+    }
+
+
+
     public Artifact() {
 
     }
 
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<Substat> substats) {
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> substats) {
         this.mainStatValue = mainStatValue;
         this.artifactType = artifactType;
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
-        this.substats = substats;
+        //this.substats = substats;
     }
 
     public Artifact(double mainStatValue) {
         this.mainStatValue = mainStatValue;
+    }
+
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat) {
     }
 
     public int getId() {
