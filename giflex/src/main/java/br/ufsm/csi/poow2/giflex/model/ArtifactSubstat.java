@@ -10,7 +10,6 @@ public class ArtifactSubstat {
 
     @EmbeddedId
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private ArtifactSubstatId id = new ArtifactSubstatId();
 
     @ManyToOne
@@ -34,6 +33,9 @@ public class ArtifactSubstat {
         this.artifact = artifact;
         this.substat = substat;
         this.substatValue = substatValue;
+    }
+
+    public ArtifactSubstat(Artifact artifact, Substat substat, double substatValue) {
     }
 
     public ArtifactSubstatId getId() {

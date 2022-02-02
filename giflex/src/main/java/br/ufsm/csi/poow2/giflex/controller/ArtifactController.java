@@ -1,6 +1,7 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
+import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.repository.ArtifactRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,13 +54,13 @@ public class ArtifactController {
 
     @PostMapping("/artifacts")
     public ResponseEntity<Artifact> addArtifact(@RequestBody Artifact artifact) {
+        //artifactRepository.addArtifactSubstats(artifact);
         Artifact _artifact = artifactRepository.save(new Artifact(
                 artifact.getMainStatValue(),
                 artifact.getArtifactType(),
                 artifact.getArtifactSetType(),
                 artifact.getMainstat(),
                 artifact.getArtifactSubstats()
-
         ));
         return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
     }

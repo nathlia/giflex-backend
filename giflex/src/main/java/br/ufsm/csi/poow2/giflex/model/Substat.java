@@ -27,6 +27,10 @@ public class Substat {
     public Substat() {
     }
 
+    public Substat(int id) {
+        this.id = id;
+    }
+
     public Substat(String name, Set<Artifact> artifacts, Set<ArtifactSubstat> artifactSubstats) {
         this.name = name;
         this.artifacts = artifacts;
