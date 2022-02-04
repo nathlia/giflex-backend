@@ -1,5 +1,7 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,7 +15,7 @@ public class Player {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
 
-  @Column(name = "username")
+  @Column(name = "username", nullable = false, unique = true)
   private String username;
 
   @Column(name = "name")
@@ -39,6 +41,9 @@ public class Player {
     this.name = name;
     this.username = username;
     this.password = password;
+  }
+
+  public Player(Player playerByUsername) {
   }
 
   public int getId() {
