@@ -1,11 +1,11 @@
 package br.ufsm.csi.poow2.giflex.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -30,20 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public WebSecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
-
-//    public DaoAuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(this.userDetailsService);
-//        authenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
-//        return authenticationProvider;
-//    }
-
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        System.out.println("*** WebSecurityConfig");
-//        auth.authenticationProvider(this.authenticationProvider());
-//    }
 
     @Autowired
     public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
@@ -66,22 +55,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                //.authenticationProvider(this.authenticationProvider())
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+                //TODO delete teste
+                .antMatchers(HttpMethod.GET, "/teste").permitAll()
                 .antMatchers(HttpMethod.POST, "/artifact-types").permitAll()
-                .antMatchers(HttpMethod.GET, "/characters").permitAll() .anyRequest().authenticated();
-                //.and() .formLogin();
+                .antMatchers(HttpMethod.GET, "/characters").authenticated();
 
         http.addFilterBefore(this.authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-//                .permitAll().anyRequest().authenticated()
-//                .and()
-//                .formLogin().loginPage("/login")
-//                .permitAll()
-//                .and()
-//                .logout() .invalidateHttpSession(true)
-//                .clearAuthentication(true).permitAll();
     }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        System.out.println("** CORS config **");
+        final var config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOriginPattern("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+
+        final var source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+
+        return new CorsFilter(source);
+    }
+
 }
