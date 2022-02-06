@@ -9,9 +9,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
-    @Query("select p from Player p where p.username = ?1")
     public default Player findByUsername(String username) {
-            return new Player("Natty", "natty", new BCryptPasswordEncoder().encode("123"));
+           if(username.equals("natty")) {
+               return new Player("Nathalia","natty", new BCryptPasswordEncoder().encode("123"));
+           } else {
+               return null;
+           }
     }
 
     //Player findByUsername(String username);

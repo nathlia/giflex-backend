@@ -24,7 +24,11 @@ public class Player {
   @Column(name = "password")
   private String password;
 
-//  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @Column(name = "token")
+  public String token;
+
+
+  //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //  @JoinTable(
 //          name = "usercharacter",
 //          joinColumns = @JoinColumn(name = "playerid", referencedColumnName = "id"),
@@ -81,7 +85,15 @@ public class Player {
     this.password = password;
   }
 
-//  public Set<Character> getCharacters() {
+  public String getToken() {
+    return token;
+  }
+
+  public void setToken(String token) {
+    this.token = token;
+  }
+
+  //  public Set<Character> getCharacters() {
 //    return addedCharacters;
 //  }
 //
