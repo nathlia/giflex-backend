@@ -17,29 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private PlayerRepository playerRepository;
 
-//    @Override
-//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//
-//        System.out.println("Username: "+username);
-//
-//        Player player = playerRepository.findByUsername(username);
-//
-//        if (player == null) {
-//            throw new UsernameNotFoundException("Username or Password Not Found");
-//        }
-//        else {
-//            UserDetails userDetails = User.withUsername(player.getUsername())
-//                    .password(player.getPassword())
-//                    .authorities("USER")
-//                    .build();
-//
-//            return userDetails;
-//        }
-//
-//    }
-
     @Override
-
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("Username: "+username);
 

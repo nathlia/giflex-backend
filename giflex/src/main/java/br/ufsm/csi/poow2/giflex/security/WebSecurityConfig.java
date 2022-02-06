@@ -57,11 +57,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers( "/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 //TODO delete teste
                 .antMatchers(HttpMethod.GET, "/teste").permitAll()
-                .antMatchers(HttpMethod.POST, "/artifact-types").permitAll()
-                .antMatchers(HttpMethod.GET, "/characters").authenticated();
+                .antMatchers(HttpMethod.GET, "/characters").hasAuthority("USER");
 
         http.addFilterBefore(this.authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
