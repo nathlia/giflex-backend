@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class CharacterArtifactController {
 
@@ -21,7 +21,7 @@ public class CharacterArtifactController {
         this.characterArtifactRepository = characterArtifactRepository;
     }
 
-    @GetMapping("/character-artifacts")
+    @GetMapping("/artifact-set")
     public ResponseEntity<List<CharacterArtifact>> getAllEquippedArtifacts() {
         try {
             ArrayList<CharacterArtifact> characterArtifacts = new ArrayList<>(characterArtifactRepository.findAll());
@@ -37,21 +37,21 @@ public class CharacterArtifactController {
         }
     }
 
-    @GetMapping("/character-artifacts/{id}")
+    @GetMapping("/artifact-set/{id}")
     public ResponseEntity<CharacterArtifact> getEquippedArtifactById(@PathVariable("id") int id) {
         Optional<CharacterArtifact> characterArtifactData = characterArtifactRepository.findById(id);
 
         return characterArtifactData.map(characterArtifact -> new ResponseEntity<>(characterArtifact, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @DeleteMapping("/character-artifacts/{id}")
-    public ResponseEntity<CharacterArtifact> deleteEquippedArtifactById(@PathVariable("id") int id) {
-
-        try {
-            characterArtifactRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @DeleteMapping("/artifact-set/{id}")
+//    public ResponseEntity<CharacterArtifact> deleteEquippedArtifactById(@PathVariable("id") int id) {
+//
+//        try {
+//            characterArtifactRepository.deleteById(id);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
