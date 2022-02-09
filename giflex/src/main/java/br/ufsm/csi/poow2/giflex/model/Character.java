@@ -24,33 +24,41 @@ public class Character {
   @Column(name = "critdmg")
   private String critDmg;
 
-  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinTable(
-          name = "character_artifact",
-          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-          inverseJoinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id")
-  )
+//  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//  @JoinTable(
+//          name = "character_artifact",
+//          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
+//          inverseJoinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id")
+//  )
+//
+//  private Set<Artifact> artifacts = new HashSet<>();
 
-  private Set<Artifact> artifacts = new HashSet<>();
 
-  public Set<Artifact> getArtifacts() {
-    return artifacts;
-  }
-
-  public void setArtifacts(Set<Artifact> artifacts) {
-    this.artifacts = artifacts;
-  }
+//  public Set<Artifact> getArtifacts() {
+//    return artifacts;
+//  }
+//
+//  public void setArtifacts(Set<Artifact> artifacts) {
+//    this.artifacts = artifacts;
+//  }
 
   public Character() {
 
   }
 
-  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> artifacts) {
+//  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> artifacts) {
+//    this.name = name;
+//    this.level = level;
+//    this.critRate = critRate;
+//    this.critDmg = critDmg;
+//    this.artifacts = artifacts;
+//  }
+
+  public Character(String name, String level, String critRate, String critDmg) {
     this.name = name;
     this.level = level;
     this.critRate = critRate;
     this.critDmg = critDmg;
-    this.artifacts = artifacts;
   }
 
   public int getId() {

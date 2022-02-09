@@ -58,8 +58,8 @@ public class CharacterController {
                 character.getName(),
                 character.getLevel(),
                 character.getCritRate(),
-                character.getCritDmg(),
-                character.getArtifacts()
+                character.getCritDmg()
+                //character.getArtifacts()
         ));
         return new ResponseEntity<>(_character, HttpStatus.CREATED);
     }
@@ -74,7 +74,7 @@ public class CharacterController {
             _character.setLevel(character.getLevel());
             _character.setCritRate(character.getCritRate());
             _character.setCritDmg(character.getCritDmg());
-            _character.setArtifacts(character.getArtifacts());
+            //_character.setArtifacts(character.getArtifacts());
 
             return new ResponseEntity<>(characterRepository.save(_character), HttpStatus.OK);
         } else {
