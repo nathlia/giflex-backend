@@ -2,7 +2,10 @@ package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
 import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
+import br.ufsm.csi.poow2.giflex.model.Character;
 import br.ufsm.csi.poow2.giflex.repository.ArtifactRepository;
+import br.ufsm.csi.poow2.giflex.repository.CharacterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +19,16 @@ import java.util.Optional;
 @RestController
 public class ArtifactController {
 
-    final
+    @Autowired
     ArtifactRepository artifactRepository;
 
-    public ArtifactController(ArtifactRepository artifactRepository) {
-        this.artifactRepository = artifactRepository;
-    }
+    @Autowired
+    CharacterRepository characterRepository;
+
+
+//    public ArtifactController(ArtifactRepository artifactRepository) {
+//        this.artifactRepository = artifactRepository;
+//    }
 
     @GetMapping("/artifacts")
     public ResponseEntity<List<Artifact>> getAllArtifacts() {
@@ -53,9 +60,13 @@ public class ArtifactController {
 
     //TODO POST and PUT
 
-    @PostMapping("/artifacts")
-    public ResponseEntity<Artifact> addArtifact(@RequestBody Artifact artifact) {
-        //artifactRepository.addArtifactSubstats(artifact);
+    @PostMapping("/artifacts/{charaId}")
+    public ResponseEntity<Artifact> addArtifact(
+            @RequestBody Artifact artifact,
+            @PathVariable("charaId") int charaId
+            //Integer charaId
+    ) {
+        //add artifact
         Artifact _artifact = artifactRepository.save(new Artifact(
                 artifact.getMainStatValue(),
                 artifact.getArtifactType(),
@@ -63,16 +74,35 @@ public class ArtifactController {
                 artifact.getMainstat(),
                 artifact.getArtifactSubstats()
         ));
-        return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
+
+        //add artifact to character
+        Optional<Character> characterData = characterRepository.findById(charaId);
+
+        if (characterData.isPresent()) {
+            Character _character = characterData.get();
+            _character.getEquippedArtifacts().add(_artifact);
+            _artifact.getCharacters().add(_character);
+
+            characterRepository.save(_character);
+            artifactRepository.save(_artifact);
+
+            return new ResponseEntity<>(_artifact,  HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @PutMapping("/artifacts/{id}")
+    @PutMapping("/artifacts/{artId}")
     public ResponseEntity<Artifact> editArtifact(
-            @PathVariable("id") int id,
+            //@PathVariable("charaId") int charaId,
+            @PathVariable("artId") int artId,
             @RequestBody Artifact artifact ) {
-        Optional<Artifact> artifactData = artifactRepository.findById(id);
+        Optional<Artifact> artifactData = artifactRepository.findById(artId);
+       // Optional<Character> characterData = characterRepository.findById(charaId);
 
-        if (artifactData.isPresent()) {
+        if (artifactData.isPresent()
+                //&& characterData.isPresent()
+        ) {
             Artifact _artifact = artifactData.get();
             _artifact.setMainStatValue(artifact.getMainStatValue());
             _artifact.setArtifactType(artifact.getArtifactType());

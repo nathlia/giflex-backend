@@ -7,9 +7,6 @@ import javax.persistence.*;
 public class CharacterArtifact {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
-
   @Column(name = "character_id")
   private int CharacterId;
 
@@ -24,10 +21,10 @@ public class CharacterArtifact {
   public CharacterArtifact() {
 
   }
-
-  public CharacterArtifact(int id) {
-    this.id = id;
-  }
+//
+//  public CharacterArtifact(int id) {
+//    this.id = id;
+//  }
 
   public CharacterArtifact(int characterId, int artifactId) {
     CharacterId = characterId;
@@ -35,18 +32,18 @@ public class CharacterArtifact {
   }
 
   public CharacterArtifact(int id, int characterId, int artifactId) {
-    this.id = id;
+    //this.id = id;
     CharacterId = characterId;
     ArtifactId = artifactId;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
+//  public int getId() {
+//    return id;
+//  }
+//
+//  public void setId(int id) {
+//    this.id = id;
+//  }
 
 
   public int getCharacterId() {

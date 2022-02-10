@@ -1,5 +1,7 @@
 package br.ufsm.csi.poow2.giflex.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,17 +26,32 @@ public class Character {
   @Column(name = "critdmg")
   private String critDmg;
 
-//  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//  @JoinTable(
-//          name = "character_artifact",
-//          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
-//          inverseJoinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id")
-//  )
-//
-//  private Set<Artifact> artifacts = new HashSet<>();
 
+  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @JoinTable(
+          name = "character_artifact",
+          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id")
+  )
+  private Set<Artifact> equippedArtifacts = new HashSet<>();
 
-//  public Set<Artifact> getArtifacts() {
+  public Set<Artifact> getEquippedArtifacts() {
+    return equippedArtifacts;
+  }
+
+  public void setEquippedArtifacts(Set<Artifact> equippedArtifacts) {
+    this.equippedArtifacts = equippedArtifacts;
+  }
+
+  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> equippedArtifacts) {
+    this.name = name;
+    this.level = level;
+    this.critRate = critRate;
+    this.critDmg = critDmg;
+    this.equippedArtifacts = equippedArtifacts;
+  }
+
+  //  public Set<Artifact> getArtifacts() {
 //    return artifacts;
 //  }
 //

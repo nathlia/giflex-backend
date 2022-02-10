@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JWTUtil {
-    public static final long LiFE_TIME = Duration.ofSeconds(3600).toMillis();
+    public static final long LiFE_TIME = Duration.ofSeconds(36000).toMillis();
 
     public String geraToken(String username) {
         final Map<String, Object> claims = new HashMap<>();

@@ -1,16 +1,7 @@
 package br.ufsm.csi.poow2.giflex.repository;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
-import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
-import br.ufsm.csi.poow2.giflex.model.Substat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.swing.text.html.parser.Entity;
-import javax.transaction.Transactional;
-import java.util.Set;
 
 public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
 
