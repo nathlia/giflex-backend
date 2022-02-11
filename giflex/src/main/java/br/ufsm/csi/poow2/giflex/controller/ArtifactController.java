@@ -1,21 +1,21 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
-import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.model.Character;
+import br.ufsm.csi.poow2.giflex.model.CharacterArtifact;
 import br.ufsm.csi.poow2.giflex.repository.ArtifactRepository;
+import br.ufsm.csi.poow2.giflex.repository.CharacterArtifactRepository;
 import br.ufsm.csi.poow2.giflex.repository.CharacterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "http://localhost:8081")
-//@CrossOrigin(origins = "*")
 @RestController
 public class ArtifactController {
 
@@ -25,10 +25,8 @@ public class ArtifactController {
     @Autowired
     CharacterRepository characterRepository;
 
-
-//    public ArtifactController(ArtifactRepository artifactRepository) {
-//        this.artifactRepository = artifactRepository;
-//    }
+    @Autowired
+    CharacterArtifactRepository characterArtifactRepository;
 
     @GetMapping("/artifacts")
     public ResponseEntity<List<Artifact>> getAllArtifacts() {
@@ -51,14 +49,11 @@ public class ArtifactController {
         Optional<Artifact> artifactData = artifactRepository.findById(id);
 
         if (artifactData.isPresent()) {
-            //artifactRepository.getSubstatValue(artifactData.get());
             return new ResponseEntity<>(artifactData.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    //TODO POST and PUT
 
     @PostMapping("/artifacts/{charaId}")
     public ResponseEntity<Artifact> addArtifact(
@@ -93,16 +88,10 @@ public class ArtifactController {
     }
 
     @PutMapping("/artifacts/{artId}")
-    public ResponseEntity<Artifact> editArtifact(
-            //@PathVariable("charaId") int charaId,
-            @PathVariable("artId") int artId,
-            @RequestBody Artifact artifact ) {
+    public ResponseEntity<Artifact> editArtifact(@PathVariable("artId") int artId, @RequestBody Artifact artifact ) {
         Optional<Artifact> artifactData = artifactRepository.findById(artId);
-       // Optional<Character> characterData = characterRepository.findById(charaId);
 
-        if (artifactData.isPresent()
-                //&& characterData.isPresent()
-        ) {
+        if (artifactData.isPresent()) {
             Artifact _artifact = artifactData.get();
             _artifact.setMainStatValue(artifact.getMainStatValue());
             _artifact.setArtifactType(artifact.getArtifactType());
@@ -117,10 +106,18 @@ public class ArtifactController {
         }
     }
 
+    //TODO DELETE ARTIFACT
     @DeleteMapping("/artifacts/{id}")
     public ResponseEntity<Artifact> deleteUserById(@PathVariable("id") int id) {
-
         try {
+
+            Optional<Artifact> artifactData = artifactRepository.findById(id);
+
+            if (artifactData.isPresent()) {
+                Artifact _artifact = artifactData.get();
+                _artifact.getCharacters().removeAll(_artifact.getCharacters());
+            }
+            //characterArtifactRepository.deleteByArtifactId(id);
             artifactRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {

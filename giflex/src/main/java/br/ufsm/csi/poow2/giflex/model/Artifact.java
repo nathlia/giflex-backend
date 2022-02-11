@@ -53,26 +53,9 @@ public class Artifact {
     private Set<ArtifactSubstat> artifactSubstats;
 
     //characters
-    @ManyToMany(mappedBy = "equippedArtifacts")
+    @ManyToMany(mappedBy = "equippedArtifacts", cascade = CascadeType.ALL)
     @JsonIgnore
     Set<Character> characters = new HashSet<>();
-
-    public Set<Character> getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(Set<Character> characters) {
-        this.characters = characters;
-    }
-
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> artifactSubstats, Set<Character> characters) {
-        this.mainStatValue = mainStatValue;
-        this.artifactType = artifactType;
-        this.artifactSetType = artifactSetType;
-        this.mainstat = mainstat;
-        this.artifactSubstats = artifactSubstats;
-        this.characters = characters;
-    }
 
     public Artifact() {
 
@@ -84,6 +67,15 @@ public class Artifact {
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
         this.artifactSubstats = artifactSubstats;
+    }
+
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> artifactSubstats, Set<Character> characters) {
+        this.mainStatValue = mainStatValue;
+        this.artifactType = artifactType;
+        this.artifactSetType = artifactSetType;
+        this.mainstat = mainstat;
+        this.artifactSubstats = artifactSubstats;
+        this.characters = characters;
     }
 
     public int getId() {
@@ -133,4 +125,24 @@ public class Artifact {
     public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
         this.artifactSubstats = artifactSubstats;
     }
+
+    public Set<Character> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<Character> characters) {
+        this.characters = characters;
+    }
+
+    public void addCharacter(Character character) {
+        this.characters.add(character);
+        character.getEquippedArtifacts().add(this);
+    }
+
+    public void removeCharacter(Character character) {
+        this.characters.remove(character);
+        character.getEquippedArtifacts().remove(this);
+    }
+
+
 }

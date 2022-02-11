@@ -2,8 +2,13 @@ package br.ufsm.csi.poow2.giflex.repository;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
+
+
 
 //    default void addArtifactSubstats(Artifact artifact) {
         //Set<ArtifactSubstat> artifactSubstat = artifact.getArtifactSubstats();
