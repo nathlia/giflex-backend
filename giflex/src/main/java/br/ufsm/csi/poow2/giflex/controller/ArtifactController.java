@@ -139,6 +139,7 @@ public class ArtifactController {
             }
 
             characterArtifactRepository.deleteByArtifactId(id);
+            artifactSubstatRepository.deleteByArtifactId(id);
             artifactRepository.deleteArtifact(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
