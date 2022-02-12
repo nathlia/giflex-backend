@@ -1,20 +1,19 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
+import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.model.Character;
-import br.ufsm.csi.poow2.giflex.model.CharacterArtifact;
-import br.ufsm.csi.poow2.giflex.repository.ArtifactRepository;
-import br.ufsm.csi.poow2.giflex.repository.CharacterArtifactRepository;
-import br.ufsm.csi.poow2.giflex.repository.CharacterRepository;
+import br.ufsm.csi.poow2.giflex.model.Substat;
+import br.ufsm.csi.poow2.giflex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class ArtifactController {
@@ -27,6 +26,12 @@ public class ArtifactController {
 
     @Autowired
     CharacterArtifactRepository characterArtifactRepository;
+
+    @Autowired
+    SubstatRepository substatRepository;
+
+    @Autowired
+    ArtifactSubstatRepository artifactSubstatRepository;
 
     @GetMapping("/artifacts")
     public ResponseEntity<List<Artifact>> getAllArtifacts() {
@@ -70,6 +75,29 @@ public class ArtifactController {
                 artifact.getArtifactSubstats()
         ));
 
+//        Set<ArtifactSubstat> substats = artifact.getArtifactSubstats();
+//
+//        for (ArtifactSubstat artifactSubstat : substats) {
+//            //Optional<Substat> substatData = artifactSubstatRepository.findById(artifact.getArtifactSubstats().contains());
+//
+//            //if (substatData.isPresent()) {
+//            //Substat _substat = substatData.get();
+//            //_substat.getArtifacts().add(_artifact);
+//
+//            ArtifactSubstat _artifactSubstat = artifactSubstatRepository.save(new ArtifactSubstat(
+//                    artifactSubstat.getArtifact(),
+//                    artifactSubstat.getSubstat(),
+//                    artifactSubstat.getSubstatValue()
+//            ));
+////
+//            Substat substat = new Substat();
+//            substat.getArtifactSubstats().add(_artifactSubstat);
+//            _artifact.getArtifactSubstats().add(_artifactSubstat);
+////
+//            substatRepository.save(substat);
+//            artifactRepository.save(_artifact);
+//        }
+
         //add artifact to character
         Optional<Character> characterData = characterRepository.findById(charaId);
 
@@ -81,14 +109,14 @@ public class ArtifactController {
             characterRepository.save(_character);
             artifactRepository.save(_artifact);
 
-            return new ResponseEntity<>(_artifact,  HttpStatus.CREATED);
+            return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PutMapping("/artifacts/{artId}")
-    public ResponseEntity<Artifact> editArtifact(@PathVariable("artId") int artId, @RequestBody Artifact artifact ) {
+    public ResponseEntity<Artifact> editArtifact(@PathVariable("artId") int artId, @RequestBody Artifact artifact) {
         Optional<Artifact> artifactData = artifactRepository.findById(artId);
 
         if (artifactData.isPresent()) {
