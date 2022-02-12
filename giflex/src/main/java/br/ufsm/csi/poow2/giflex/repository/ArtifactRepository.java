@@ -1,14 +1,31 @@
 package br.ufsm.csi.poow2.giflex.repository;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
+import br.ufsm.csi.poow2.giflex.model.Character;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+@Transactional
 public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
 
+    @Modifying
+    @Query(value = "DELETE FROM artifact WHERE  artifact.id = ?1", nativeQuery = true)
+    void deleteById(int id);
 
+    @Modifying
+    @Query(value = "DELETE FROM artifact a WHERE  a.id = ?1", nativeQuery = true)
+    void deleteArtifact(int id);
+
+    default void deleteEquippedCharacters(Artifact artifact) {
+        Set<Character> characters = artifact.getCharacters();
+        for (Character c: characters) {
+            artifact.removeCharacter(c);
+        }
+    }
 
 //    default void addArtifactSubstats(Artifact artifact) {
         //Set<ArtifactSubstat> artifactSubstat = artifact.getArtifactSubstats();
@@ -39,15 +56,6 @@ public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
 //            double value = getArtifactValue(artifact.getId(), substat.getId());
 //            substat.setSubstatValue(value);
 //        }
-//    }
-
-//    @Transactional
-//    public default void insertSubstatsWithQuery(ArtifactSubstat artifactSubstat) {
-//        entityManager.createNativeQuery("INSERT INTO artifact_substat (artifact_id, substat_id, substatvalue) VALUES (?, ?, ?)")
-//                .setParameter(1, artifactSubstat.getArtifact())
-//                .setParameter(2, artifactSubstat.getSubstat())
-//                .setParameter(3, artifactSubstat.getSubstatValue())
-//                .executeUpdate();
 //    }
 
 

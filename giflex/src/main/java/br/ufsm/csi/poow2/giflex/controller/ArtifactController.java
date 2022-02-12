@@ -134,19 +134,20 @@ public class ArtifactController {
         }
     }
 
-    //TODO DELETE ARTIFACT
     @DeleteMapping("/artifacts/{id}")
-    public ResponseEntity<Artifact> deleteUserById(@PathVariable("id") int id) {
+    public ResponseEntity<Artifact> deleteArtifactById(@PathVariable("id") int id) {
         try {
 
             Optional<Artifact> artifactData = artifactRepository.findById(id);
 
             if (artifactData.isPresent()) {
                 Artifact _artifact = artifactData.get();
-                _artifact.getCharacters().removeAll(_artifact.getCharacters());
+                artifactRepository.deleteEquippedCharacters(_artifact);
             }
-            //characterArtifactRepository.deleteByArtifactId(id);
-            artifactRepository.deleteById(id);
+
+            characterArtifactRepository.deleteByArtifactId(id);
+            artifactRepository.deleteArtifact(id);
+
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

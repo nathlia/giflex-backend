@@ -122,4 +122,5 @@ public class Character {
     this.critDmg = critDmg;
   }
 
+
 }
