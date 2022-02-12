@@ -17,7 +17,6 @@ public class Artifact {
     @Column(name = "mainstatvalue")
     private double mainStatValue;
 
-    //TODO POST and PUT
     @ManyToOne
     @JoinColumn(name = "artifacttypeid", referencedColumnName = "id")
     private ArtifactType artifactType;
@@ -30,7 +29,7 @@ public class Artifact {
     @JoinColumn(name = "mainstatid", referencedColumnName = "id")
     private Substat mainstat;
 
-    //TODO get substat value
+//TODO add Substats
 //
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinTable(
@@ -143,6 +142,5 @@ public class Artifact {
         this.characters.remove(character);
         character.getEquippedArtifacts().remove(this);
     }
-
 
 }

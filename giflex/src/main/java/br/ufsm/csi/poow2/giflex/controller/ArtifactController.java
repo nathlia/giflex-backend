@@ -3,7 +3,6 @@ package br.ufsm.csi.poow2.giflex.controller;
 import br.ufsm.csi.poow2.giflex.model.Artifact;
 import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.model.Character;
-import br.ufsm.csi.poow2.giflex.model.Substat;
 import br.ufsm.csi.poow2.giflex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -75,28 +74,9 @@ public class ArtifactController {
                 artifact.getArtifactSubstats()
         ));
 
-//        Set<ArtifactSubstat> substats = artifact.getArtifactSubstats();
-//
-//        for (ArtifactSubstat artifactSubstat : substats) {
-//            //Optional<Substat> substatData = artifactSubstatRepository.findById(artifact.getArtifactSubstats().contains());
-//
-//            //if (substatData.isPresent()) {
-//            //Substat _substat = substatData.get();
-//            //_substat.getArtifacts().add(_artifact);
-//
-//            ArtifactSubstat _artifactSubstat = artifactSubstatRepository.save(new ArtifactSubstat(
-//                    artifactSubstat.getArtifact(),
-//                    artifactSubstat.getSubstat(),
-//                    artifactSubstat.getSubstatValue()
-//            ));
-////
-//            Substat substat = new Substat();
-//            substat.getArtifactSubstats().add(_artifactSubstat);
-//            _artifact.getArtifactSubstats().add(_artifactSubstat);
-////
-//            substatRepository.save(substat);
-//            artifactRepository.save(_artifact);
-//        }
+        //TODO Substat
+
+
 
         //add artifact to character
         Optional<Character> characterData = characterRepository.findById(charaId);
@@ -108,6 +88,7 @@ public class ArtifactController {
 
             characterRepository.save(_character);
             artifactRepository.save(_artifact);
+            //artifactSubstatRepository.getArtifactSubstats(_artifact);
 
             return new ResponseEntity<>(_artifact, HttpStatus.CREATED);
         } else {

@@ -5,16 +5,11 @@ import br.ufsm.csi.poow2.giflex.model.Character;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 @Transactional
 public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
-
-    @Modifying
-    @Query(value = "DELETE FROM artifact WHERE  artifact.id = ?1", nativeQuery = true)
-    void deleteById(int id);
 
     @Modifying
     @Query(value = "DELETE FROM artifact a WHERE  a.id = ?1", nativeQuery = true)

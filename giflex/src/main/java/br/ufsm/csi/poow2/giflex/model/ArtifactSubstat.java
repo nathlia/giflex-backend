@@ -71,4 +71,8 @@ public class ArtifactSubstat {
     public void setSubstatValue(double substatValue) {
         this.substatValue = substatValue;
     }
+
+    public int getSubstatId (ArtifactSubstat artifactSubstat) {
+        return artifactSubstat.getSubstat().getId();
+    }
 }

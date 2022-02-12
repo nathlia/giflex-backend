@@ -1,7 +1,5 @@
 package br.ufsm.csi.poow2.giflex.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,12 +33,9 @@ public class Character {
   )
   private Set<Artifact> equippedArtifacts = new HashSet<>();
 
-  public Set<Artifact> getEquippedArtifacts() {
-    return equippedArtifacts;
-  }
 
-  public void setEquippedArtifacts(Set<Artifact> equippedArtifacts) {
-    this.equippedArtifacts = equippedArtifacts;
+  public Character() {
+
   }
 
   public Character(String name, String level, String critRate, String critDmg, Set<Artifact> equippedArtifacts) {
@@ -50,26 +45,6 @@ public class Character {
     this.critDmg = critDmg;
     this.equippedArtifacts = equippedArtifacts;
   }
-
-  //  public Set<Artifact> getArtifacts() {
-//    return artifacts;
-//  }
-//
-//  public void setArtifacts(Set<Artifact> artifacts) {
-//    this.artifacts = artifacts;
-//  }
-
-  public Character() {
-
-  }
-
-//  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> artifacts) {
-//    this.name = name;
-//    this.level = level;
-//    this.critRate = critRate;
-//    this.critDmg = critDmg;
-//    this.artifacts = artifacts;
-//  }
 
   public Character(String name, String level, String critRate, String critDmg) {
     this.name = name;
@@ -122,5 +97,11 @@ public class Character {
     this.critDmg = critDmg;
   }
 
+  public Set<Artifact> getEquippedArtifacts() {
+    return equippedArtifacts;
+  }
 
+  public void setEquippedArtifacts(Set<Artifact> equippedArtifacts) {
+    this.equippedArtifacts = equippedArtifacts;
+  }
 }

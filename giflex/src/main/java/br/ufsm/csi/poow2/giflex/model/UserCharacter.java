@@ -66,20 +66,4 @@ public class UserCharacter {
     this.characterId = characterId;
   }
 
-//  public Player getPlayer() {
-//    return player;
-//  }
-//
-//  public void setPlayer(Player player) {
-//    this.player = player;
-//  }
-//
-//  public Character getCharacter() {
-//    return character;
-//  }
-//
-//  public void setCharacter(Character character) {
-//    this.character = character;
-//  }
-
 }
