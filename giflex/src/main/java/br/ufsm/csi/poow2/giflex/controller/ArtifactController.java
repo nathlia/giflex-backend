@@ -75,19 +75,20 @@ public class ArtifactController {
                 artifact.getArtifactSubstats()
         ));
 
-        //TODO Substat
-
-        Set<ArtifactSubstat> artifactSubstats = artifact.getArtifactSubstats();
-        for (ArtifactSubstat as: artifactSubstats) {
-            Substat substat = as.getSubstat();
-            double value = as.getSubstatValue();
-            //addArtifactSubstat(artifact.getId(), substat.getId(), value);
-            System.out.printf("********>>\nA id: %d \nS id: %d \nValue: %f\n", _artifact.getId(), substat.getId(), value);
-            as.setSubstat(substat);
-            as.setArtifact(_artifact);
-            as.setSubstatValue(value);
-            substat.setArtifactSubstats(artifactSubstats);
-            artifactSubstatRepository.save(as);
+        //add all substats to artifact
+        if (artifact.getArtifactSubstats() != null) {
+            Set<ArtifactSubstat> artifactSubstats = artifact.getArtifactSubstats();
+            for (ArtifactSubstat as: artifactSubstats) {
+                Substat substat = as.getSubstat();
+                double value = as.getSubstatValue();
+                //addArtifactSubstat(artifact.getId(), substat.getId(), value);
+                System.out.printf("********>>\nA id: %d \nS id: %d \nValue: %f\n", _artifact.getId(), substat.getId(), value);
+                as.setSubstat(substat);
+                as.setArtifact(_artifact);
+                as.setSubstatValue(value);
+                substat.setArtifactSubstats(artifactSubstats);
+                artifactSubstatRepository.save(as);
+            }
         }
 
         //add artifact to character
