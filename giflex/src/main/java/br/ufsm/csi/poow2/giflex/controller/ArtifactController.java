@@ -116,7 +116,10 @@ public class ArtifactController {
             _artifact.setArtifactSetType(artifact.getArtifactSetType());
             _artifact.setMainstat(artifact.getMainstat());
             _artifact.setMainStatValue(artifact.getMainStatValue());
-            _artifact.setArtifactSubstats(artifact.getArtifactSubstats());
+            //_artifact.setArtifactSubstats(artifact.getArtifactSubstats());
+
+            //artifactSubstatRepository.getArtifactSubstats(_artifact);
+
 
             return new ResponseEntity<>(artifactRepository.save(_artifact), HttpStatus.OK);
         } else {
