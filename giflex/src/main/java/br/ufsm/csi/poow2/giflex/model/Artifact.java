@@ -29,9 +29,6 @@ public class Artifact {
     @JoinColumn(name = "mainstatid", referencedColumnName = "id")
     private Substat mainstat;
 
-    @OneToMany(mappedBy = "artifact")
-    private Set<ArtifactSubstat> artifactSubstats;
-
     //characters
     @ManyToMany(mappedBy = "equippedArtifacts", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -41,20 +38,18 @@ public class Artifact {
 
     }
 
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> artifactSubstats) {
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat) {
         this.mainStatValue = mainStatValue;
         this.artifactType = artifactType;
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
-        this.artifactSubstats = artifactSubstats;
     }
 
-    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat, Set<ArtifactSubstat> artifactSubstats, Set<Character> characters) {
+    public Artifact(double mainStatValue, ArtifactType artifactType, ArtifactSetType artifactSetType, Substat mainstat,  Set<Character> characters) {
         this.mainStatValue = mainStatValue;
         this.artifactType = artifactType;
         this.artifactSetType = artifactSetType;
         this.mainstat = mainstat;
-        this.artifactSubstats = artifactSubstats;
         this.characters = characters;
     }
 
@@ -96,14 +91,6 @@ public class Artifact {
 
     public void setMainstat(Substat mainstat) {
         this.mainstat = mainstat;
-    }
-
-    public Set<ArtifactSubstat> getArtifactSubstats() {
-        return artifactSubstats;
-    }
-
-    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
-        this.artifactSubstats = artifactSubstats;
     }
 
     public Set<Character> getCharacters() {
