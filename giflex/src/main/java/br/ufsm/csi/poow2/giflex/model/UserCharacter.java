@@ -16,11 +16,6 @@ public class UserCharacter {
   @Column(name = "characterid")
   private int characterId;
 
-//TODO add foreign tables
-
-//  private Player player;
-//  private Character character;
-
   public UserCharacter() {
 
   }

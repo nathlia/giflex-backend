@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class CharacterArtifactController {
 
@@ -43,15 +42,4 @@ public class CharacterArtifactController {
 
         return characterArtifactData.map(characterArtifact -> new ResponseEntity<>(characterArtifact, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
-//    @DeleteMapping("/artifact-set/{id}")
-//    public ResponseEntity<CharacterArtifact> deleteEquippedArtifactById(@PathVariable("id") int id) {
-//
-//        try {
-//            characterArtifactRepository.deleteById(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 }

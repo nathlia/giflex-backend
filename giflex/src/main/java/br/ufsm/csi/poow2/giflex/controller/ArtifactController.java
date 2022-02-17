@@ -64,7 +64,6 @@ public class ArtifactController {
     public ResponseEntity<Artifact> addArtifact(
             @RequestBody Artifact artifact,
             @PathVariable("charaId") int charaId
-            //Integer charaId
     ) {
         //add artifact
         Artifact _artifact = artifactRepository.save(new Artifact(
@@ -81,8 +80,6 @@ public class ArtifactController {
             for (ArtifactSubstat as: artifactSubstats) {
                 Substat substat = as.getSubstat();
                 double value = as.getSubstatValue();
-                //addArtifactSubstat(artifact.getId(), substat.getId(), value);
-                System.out.printf("********>>\nA id: %d \nS id: %d \nValue: %f\n", _artifact.getId(), substat.getId(), value);
                 as.setSubstat(substat);
                 as.setArtifact(_artifact);
                 as.setSubstatValue(value);
@@ -99,7 +96,6 @@ public class ArtifactController {
             _character.getEquippedArtifacts().add(_artifact);
             _artifact.getCharacters().add(_character);
 
-            //artifactSubstatRepository.getArtifactSubstats(_artifact);
             characterRepository.save(_character);
             artifactRepository.save(_artifact);
 

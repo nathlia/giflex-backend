@@ -1,11 +1,6 @@
 package br.ufsm.csi.poow2.giflex.model;
 
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "player")
@@ -27,10 +22,9 @@ public class Player {
   @Column(name = "token")
   public String token;
 
-
-  //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //  @JoinTable(
-//          name = "usercharacter",
+//          name = "user_character",
 //          joinColumns = @JoinColumn(name = "playerid", referencedColumnName = "id"),
 //          inverseJoinColumns = @JoinColumn(name = "characterid", referencedColumnName = "id")
 //  )

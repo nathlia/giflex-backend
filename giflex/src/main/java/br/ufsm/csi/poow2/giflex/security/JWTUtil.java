@@ -3,7 +3,6 @@ package br.ufsm.csi.poow2.giflex.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.parameters.P;
 
 import java.time.Duration;
 import java.util.Date;

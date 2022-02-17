@@ -29,25 +29,6 @@ public class Artifact {
     @JoinColumn(name = "mainstatid", referencedColumnName = "id")
     private Substat mainstat;
 
-//TODO add Substats
-//
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "artifact_substat",
-//            joinColumns = @JoinColumn(name = "artifact_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "substat_id", referencedColumnName = "id")
-//    )
-//
-//    private Set<Substat> substats = new HashSet<Substat>();
-//
-//    public Set<Substat> getSubstats() {
-//        return this.substats;
-//    }
-//
-//    public void setSubstats(Set<Substat> substats) {
-//        this.substats = substats;
-//    }
-
     @OneToMany(mappedBy = "artifact")
     private Set<ArtifactSubstat> artifactSubstats;
 

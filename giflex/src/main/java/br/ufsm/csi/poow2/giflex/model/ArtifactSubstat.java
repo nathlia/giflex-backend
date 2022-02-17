@@ -72,7 +72,4 @@ public class ArtifactSubstat {
         this.substatValue = substatValue;
     }
 
-    public int getSubstatId (ArtifactSubstat artifactSubstat) {
-        return artifactSubstat.getSubstat().getId();
-    }
 }

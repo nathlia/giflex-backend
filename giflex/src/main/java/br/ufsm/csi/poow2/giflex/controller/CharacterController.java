@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "http://localhost:8081")
-//@CrossOrigin(origins = "*")
 @RestController
 public class CharacterController {
 
@@ -59,7 +57,6 @@ public class CharacterController {
                 character.getLevel(),
                 character.getCritRate(),
                 character.getCritDmg()
-                //character.getArtifacts()
         ));
         return new ResponseEntity<>(_character, HttpStatus.CREATED);
     }
@@ -74,7 +71,6 @@ public class CharacterController {
             _character.setLevel(character.getLevel());
             _character.setCritRate(character.getCritRate());
             _character.setCritDmg(character.getCritDmg());
-            //_character.setArtifacts(character.getArtifacts());
 
             return new ResponseEntity<>(characterRepository.save(_character), HttpStatus.OK);
         } else {

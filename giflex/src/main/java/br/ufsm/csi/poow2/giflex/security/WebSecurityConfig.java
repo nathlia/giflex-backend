@@ -1,7 +1,6 @@
 package br.ufsm.csi.poow2.giflex.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -58,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/teste").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/characters").hasAuthority("USER");
+                .antMatchers(HttpMethod.GET, "/characters").hasAuthority("USER")
+        ;
 
         http.addFilterBefore(this.authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 

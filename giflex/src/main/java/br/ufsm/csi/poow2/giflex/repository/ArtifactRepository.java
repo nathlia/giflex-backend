@@ -21,37 +21,4 @@ public interface ArtifactRepository extends JpaRepository<Artifact, Integer> {
             artifact.removeCharacter(c);
         }
     }
-
-//    default void addArtifactSubstats(Artifact artifact) {
-        //Set<ArtifactSubstat> artifactSubstat = artifact.getArtifactSubstats();
-
-//        for (ArtifactSubstat artifactSubstat : artifact.getArtifactSubstats()) {
-//            Artifact artifact1 = artifactSubstat.getArtifact();
-//            Substat substat = artifactSubstat.getSubstat();
-//            double value = artifactSubstat.getSubstatValue();
-//
-//
-//            artifactSubstat.setArtifact(artifact1);
-//            artifactSubstat.setSubstat(substat);
-//            artifactSubstat.setSubstatValue(value);
-//
-//            ArtifactSubstat artifactSubstat1 = new ArtifactSubstat(artifact1, substat, value);
-
-//        }
-
- //   }
-
-//    @Query(value = "select substatvalue from artifact_substat where artifact_id = ?1 and substat_id = ?2",
-//            nativeQuery = true)
-//    Double getArtifactValue(int idA, int idS);
-//
-//    public default void getSubstatValue(Artifact artifact) {
-//        for (ArtifactSubstat substat : artifact.getSubstats()) {
-//
-//            double value = getArtifactValue(artifact.getId(), substat.getId());
-//            substat.setSubstatValue(value);
-//        }
-//    }
-
-
 }
