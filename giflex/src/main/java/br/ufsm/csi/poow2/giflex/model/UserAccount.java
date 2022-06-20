@@ -3,8 +3,8 @@ package br.ufsm.csi.poow2.giflex.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "player")
-public class Player {
+@Table(name = "useraccount")
+public class UserAccount {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +22,9 @@ public class Player {
   @Column(name = "token")
   public String token;
 
+  @Column(name = "is_admin")
+  public boolean isAdmin;
+
 //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //  @JoinTable(
 //          name = "user_character",
@@ -31,17 +34,18 @@ public class Player {
 //
 //  private Set<Character> addedCharacters = new HashSet<>();
 
-  public Player() {
+  public UserAccount() {
 
   }
 
-  public Player(String name, String username, String password) {
+  public UserAccount(String name, String username, String password, Boolean isAdmin) {
     this.name = name;
     this.username = username;
     this.password = password;
+    this.isAdmin = isAdmin;
   }
 
-  public Player(Player playerByUsername) {
+  public UserAccount(UserAccount userAccountByUsername) {
   }
 
   public int getId() {
@@ -85,6 +89,15 @@ public class Player {
 
   public void setToken(String token) {
     this.token = token;
+  }
+
+  public void setAdmin(boolean admin) {
+    //admin = false;
+    isAdmin = admin;
+  }
+
+  public boolean isAdmin() {
+    return isAdmin;
   }
 
   //  public Set<Character> getCharacters() {

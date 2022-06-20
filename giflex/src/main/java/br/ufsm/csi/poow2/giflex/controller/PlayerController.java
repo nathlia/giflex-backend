@@ -1,7 +1,7 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
-import br.ufsm.csi.poow2.giflex.model.Player;
-import br.ufsm.csi.poow2.giflex.repository.PlayerRepository;
+import br.ufsm.csi.poow2.giflex.model.UserAccount;
+import br.ufsm.csi.poow2.giflex.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +19,16 @@ public class PlayerController {
     private PasswordEncoder passwordEncoder;
 
     final
-    PlayerRepository playerRepository;
+    UserAccountRepository userAccountRepository;
 
-    public PlayerController(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    public PlayerController(UserAccountRepository userAccountRepository) {
+        this.userAccountRepository = userAccountRepository;
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<Player>> getAllUsers() {
+    public ResponseEntity<List<UserAccount>> getAllUsers() {
         try {
-            List<Player> users = new ArrayList<Player>(playerRepository.findAll());
+            List<UserAccount> users = new ArrayList<UserAccount>(userAccountRepository.findAll());
 
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,8 +42,8 @@ public class PlayerController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<Player> getUserById(@PathVariable("id") int id) {
-        Optional<Player> userData = playerRepository.findById(id);
+    public ResponseEntity<UserAccount> getUserById(@PathVariable("id") int id) {
+        Optional<UserAccount> userData = userAccountRepository.findById(id);
 
         if (userData.isPresent()) {
             return new ResponseEntity<>(userData.get(), HttpStatus.OK);
@@ -53,36 +53,37 @@ public class PlayerController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Player> addPlayer(@RequestBody Player player) {
-        Player _player = playerRepository.save(new Player(
-                player.getUsername(),
-                player.getName(),
-                player.getPassword()
+    public ResponseEntity<UserAccount> addPlayer(@RequestBody UserAccount userAccount) {
+        UserAccount _userAccount = userAccountRepository.save(new UserAccount(
+                userAccount.getUsername(),
+                userAccount.getName(),
+                userAccount.getPassword(),
+                userAccount.isAdmin()
         ));
-        return new ResponseEntity<>(_player, HttpStatus.CREATED);
+        return new ResponseEntity<>(_userAccount, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<Player> editUser(@PathVariable("id") int id, @RequestBody Player player) {
-        Optional<Player> playerData = playerRepository.findById(id);
+    public ResponseEntity<UserAccount> editUser(@PathVariable("id") int id, @RequestBody UserAccount userAccount) {
+        Optional<UserAccount> playerData = userAccountRepository.findById(id);
 
         if (playerData.isPresent()) {
-            Player _player = playerData.get();
-            _player.setUsername(player.getUsername());
-            _player.setName(player.getName());
-            _player.setPassword(passwordEncoder.encode(player.getPassword()));
+            UserAccount _userAccount = playerData.get();
+            _userAccount.setUsername(userAccount.getUsername());
+            _userAccount.setName(userAccount.getName());
+            _userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
 
-            return new ResponseEntity<>(playerRepository.save(_player), HttpStatus.OK);
+            return new ResponseEntity<>(userAccountRepository.save(_userAccount), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Player> deleteUserById(@PathVariable("id") int id) {
+    public ResponseEntity<UserAccount> deleteUserById(@PathVariable("id") int id) {
 
         try {
-            playerRepository.deleteById(id);
+            userAccountRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
