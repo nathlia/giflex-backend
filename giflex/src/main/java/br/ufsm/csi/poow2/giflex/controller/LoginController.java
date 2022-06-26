@@ -1,6 +1,6 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
-import br.ufsm.csi.poow2.giflex.model.Player;
+import br.ufsm.csi.poow2.giflex.model.UserAccount;
 import br.ufsm.csi.poow2.giflex.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,22 +20,22 @@ public class LoginController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> auth(@RequestBody Player player) {
-        System.out.println("Username: " + player.getUsername());
+    public ResponseEntity<Object> auth(@RequestBody UserAccount userAccount) {
+        System.out.println("Username: " + userAccount.getUsername());
 
         try {
             final Authentication authenticaticon = this.authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(player.getUsername(), player.getPassword()));
+                    .authenticate(new UsernamePasswordAuthenticationToken(userAccount.getUsername(), userAccount.getPassword()));
             if (authenticaticon.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(authenticaticon);
 
                 System.out.println("*** Generating Authorization Token ***");
-                String token = new JWTUtil().geraToken(player.getUsername());
+                String token = new JWTUtil().geraToken(userAccount.getUsername());
 
-                player.setToken(token);
-                player.setPassword("");
+                userAccount.setToken(token);
+                userAccount.setPassword("");
 
-                return new ResponseEntity<>(player, HttpStatus.OK);
+                return new ResponseEntity<>(userAccount, HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();
