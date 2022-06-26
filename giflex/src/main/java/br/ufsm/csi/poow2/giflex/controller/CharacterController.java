@@ -50,7 +50,7 @@ public class CharacterController {
         return characterData.map(character -> new ResponseEntity<>(character, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/characters")
+    @PostMapping("/add-characters")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character _character = characterRepository.save(new Character(
                 character.getName(),

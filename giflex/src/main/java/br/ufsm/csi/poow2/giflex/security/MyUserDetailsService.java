@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,6 +21,8 @@ public class MyUserDetailsService implements UserDetailsService {
         System.out.println("Username: "+username);
 
         UserAccount userAccount = userAccountRepository.findByUsername(username);
+
+        System.out.println(userAccount);
 
         if (userAccount == null) {
             throw new UsernameNotFoundException("Username or Password Not Found");

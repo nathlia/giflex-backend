@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class PlayerController {
+public class UserAccountController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -21,7 +21,7 @@ public class PlayerController {
     final
     UserAccountRepository userAccountRepository;
 
-    public PlayerController(UserAccountRepository userAccountRepository) {
+    public UserAccountController(UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
     }
 
@@ -57,21 +57,22 @@ public class PlayerController {
         UserAccount _userAccount = userAccountRepository.save(new UserAccount(
                 userAccount.getUsername(),
                 userAccount.getName(),
-                userAccount.getPassword(),
-                userAccount.isAdmin()
-        ));
+                passwordEncoder.encode(userAccount.getPassword()),
+                userAccount.isAdmin())
+        );
         return new ResponseEntity<>(_userAccount, HttpStatus.CREATED);
     }
 
     @PutMapping("/users/{id}")
     public ResponseEntity<UserAccount> editUser(@PathVariable("id") int id, @RequestBody UserAccount userAccount) {
-        Optional<UserAccount> playerData = userAccountRepository.findById(id);
+        Optional<UserAccount> userData = userAccountRepository.findById(id);
 
-        if (playerData.isPresent()) {
-            UserAccount _userAccount = playerData.get();
+        if (userData.isPresent()) {
+            UserAccount _userAccount = userData.get();
             _userAccount.setUsername(userAccount.getUsername());
             _userAccount.setName(userAccount.getName());
-            _userAccount.setPassword(passwordEncoder.encode(userAccount.getPassword()));
+            String encodedPassword = passwordEncoder.encode(userAccount.getPassword());
+            _userAccount.setPassword(encodedPassword);
 
             return new ResponseEntity<>(userAccountRepository.save(_userAccount), HttpStatus.OK);
         } else {
@@ -89,4 +90,6 @@ public class PlayerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }

@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public WebSecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -60,7 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers(HttpMethod.POST, "/register").permitAll()
-                .antMatchers(HttpMethod.POST, "/characters").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/add-characters").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/characters").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.GET, "/characters").hasAuthority("USER")
         ;
 
