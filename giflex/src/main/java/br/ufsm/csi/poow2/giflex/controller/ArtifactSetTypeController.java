@@ -1,7 +1,6 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.ArtifactSetType;
-import br.ufsm.csi.poow2.giflex.model.Character;
 import br.ufsm.csi.poow2.giflex.repository.ArtifactSetTypeRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +49,7 @@ public class ArtifactSetTypeController {
     }
 
 
-    @PostMapping("/add-artifact-set-types")
+    @PostMapping("/artifact-set-types")
     public ResponseEntity<ArtifactSetType> addArtifactSetType(@RequestBody ArtifactSetType artifactSetType) {
         ArtifactSetType _artifactSetType = (artifactSetTypeRepository.save(new ArtifactSetType(
                 artifactSetType.getName(),
