@@ -1,7 +1,9 @@
 package br.ufsm.csi.poow2.giflex.controller;
 
 import br.ufsm.csi.poow2.giflex.model.Artifact;
+import br.ufsm.csi.poow2.giflex.model.ArtifactSubstat;
 import br.ufsm.csi.poow2.giflex.model.Character;
+import br.ufsm.csi.poow2.giflex.model.Substat;
 import br.ufsm.csi.poow2.giflex.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class ArtifactController {
@@ -23,6 +26,12 @@ public class ArtifactController {
 
     @Autowired
     CharacterArtifactRepository characterArtifactRepository;
+
+    @Autowired
+    SubstatRepository substatRepository;
+
+    @Autowired
+    ArtifactSubstatRepository artifactSubstatRepository;
 
     @GetMapping("/artifacts")
     public ResponseEntity<List<Artifact>> getAllArtifacts() {
@@ -61,8 +70,23 @@ public class ArtifactController {
                 artifact.getMainStatValue(),
                 artifact.getArtifactType(),
                 artifact.getArtifactSetType(),
-                artifact.getMainstat()
+                artifact.getMainstat(),
+                artifact.getArtifactSubstats()
         ));
+
+        //add all substats to artifact
+        if (artifact.getArtifactSubstats() != null) {
+            Set<ArtifactSubstat> artifactSubstats = artifact.getArtifactSubstats();
+            for (ArtifactSubstat as: artifactSubstats) {
+                Substat substat = as.getSubstat();
+                double value = as.getSubstatValue();
+                as.setSubstat(substat);
+                as.setArtifact(_artifact);
+                as.setSubstatValue(value);
+                substat.setArtifactSubstats(artifactSubstats);
+                artifactSubstatRepository.save(as);
+            }
+        }
 
         //add artifact to character
         Optional<Character> characterData = characterRepository.findById(charaId);
@@ -92,6 +116,9 @@ public class ArtifactController {
             _artifact.setArtifactSetType(artifact.getArtifactSetType());
             _artifact.setMainstat(artifact.getMainstat());
             _artifact.setMainStatValue(artifact.getMainStatValue());
+            //_artifact.setArtifactSubstats(artifact.getArtifactSubstats());
+
+            //artifactSubstatRepository.getArtifactSubstats(_artifact);
 
             return new ResponseEntity<>(artifactRepository.save(_artifact), HttpStatus.OK);
         } else {
@@ -111,6 +138,7 @@ public class ArtifactController {
             }
 
             characterArtifactRepository.deleteByArtifactId(id);
+            artifactSubstatRepository.deleteByArtifactId(id);
             artifactRepository.deleteArtifact(id);
 
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
