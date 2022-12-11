@@ -5,6 +5,7 @@ import br.ufsm.csi.poow2.giflex.repository.CharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,13 @@ public class CharacterController {
     }
 
     @GetMapping("/characters")
-    public ResponseEntity<List<Character>> getAllCharacters(@RequestParam(required = false) String name ) {
+    public ResponseEntity<List<Character>> getAllCharacters(@RequestParam(required = false) String name) {
         try {
             List<Character> characters = new ArrayList<>();
 
             if (name == null) {
                 characters.addAll(characterRepository.findAll());
-            }
-            else {
+            } else {
                 characters.addAll(characterRepository.findByName(name));
             }
 
@@ -50,7 +50,7 @@ public class CharacterController {
         return characterData.map(character -> new ResponseEntity<>(character, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/add-characters")
+    @PostMapping("/characters")
     public ResponseEntity<Character> addCharacter(@RequestBody Character character) {
         Character _character = characterRepository.save(new Character(
                 character.getName(),
@@ -62,7 +62,7 @@ public class CharacterController {
     }
 
     @PutMapping("/characters/{id}")
-    public ResponseEntity<Character> editCharacter(@PathVariable("id") int id, @RequestBody Character character ) {
+    public ResponseEntity<Character> editCharacter(@PathVariable("id") int id, @RequestBody Character character) {
         Optional<Character> characterData = characterRepository.findById(id);
 
         if (characterData.isPresent()) {

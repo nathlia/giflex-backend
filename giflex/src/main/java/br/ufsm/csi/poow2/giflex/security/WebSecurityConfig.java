@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .antMatchers(HttpMethod.POST, "/register").permitAll()
                 .antMatchers(HttpMethod.GET, "/characters").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/add-characters").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/characters").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.POST, "/artifact-set-types").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/artifact-set-types/{id}").hasAuthority("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/artifact-set-types/{id}").hasAuthority("ADMIN")

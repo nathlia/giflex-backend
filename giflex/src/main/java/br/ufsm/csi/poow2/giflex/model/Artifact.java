@@ -18,7 +18,7 @@ public class Artifact {
     private double mainStatValue;
 
     @ManyToOne
-    @JoinColumn(name = "artifacttypeid", referencedColumnName = "id")
+    @JoinColumn(name = "artifacttypeid", referencedColumnName = "id", unique = true)
     private ArtifactType artifactType;
 
     @ManyToOne
