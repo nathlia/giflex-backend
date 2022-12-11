@@ -20,6 +20,10 @@ public class Substat {
     @JsonIgnore
     private Set<Artifact> artifacts;
 
+    @OneToMany(mappedBy = "substat")
+    @JsonIgnore
+    private Set<ArtifactSubstat> artifactSubstats;
+
     public Substat() {
     }
 
@@ -27,9 +31,10 @@ public class Substat {
         this.id = id;
     }
 
-    public Substat(String name, Set<Artifact> artifacts) {
+    public Substat(String name, Set<Artifact> artifacts, Set<ArtifactSubstat> artifactSubstats) {
         this.name = name;
         this.artifacts = artifacts;
+        this.artifactSubstats = artifactSubstats;
     }
 
     public int getId() {
@@ -47,6 +52,16 @@ public class Substat {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @JsonIgnore
+    public Set<ArtifactSubstat> getArtifactSubstats() {
+        return artifactSubstats;
+    }
+
+    @JsonIgnore
+    public void setArtifactSubstats(Set<ArtifactSubstat> artifactSubstats) {
+        this.artifactSubstats = artifactSubstats;
     }
 
     @JsonIgnore

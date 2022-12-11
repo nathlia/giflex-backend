@@ -23,7 +23,7 @@ public class UserAccount {
   public String token;
 
   @Column(name = "is_admin")
-  public boolean isAdmin;
+  public boolean is_admin;
 
 //  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //  @JoinTable(
@@ -38,11 +38,11 @@ public class UserAccount {
 
   }
 
-  public UserAccount(String name, String username, String password, Boolean isAdmin) {
+  public UserAccount(String name, String username, String password, Boolean is_admin) {
     this.name = name;
     this.username = username;
     this.password = password;
-    this.isAdmin = isAdmin;
+    this.is_admin = is_admin;
   }
 
   public UserAccount(UserAccount userAccountByUsername) {
@@ -91,13 +91,13 @@ public class UserAccount {
     this.token = token;
   }
 
-  public void setAdmin(boolean admin) {
+  public void setAdmin(boolean is_admin) {
     //admin = false;
-    isAdmin = admin;
+    this.is_admin = is_admin;
   }
 
   public boolean isAdmin() {
-    return isAdmin;
+    return is_admin;
   }
 
   //  public Set<Character> getCharacters() {

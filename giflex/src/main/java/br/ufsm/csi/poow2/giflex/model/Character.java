@@ -24,6 +24,20 @@ public class Character {
   @Column(name = "critdmg")
   private String critDmg;
 
+//  @OneToOne(orphanRemoval = true)
+//  @JoinTable(name = "character_filedb",
+//          joinColumns = @JoinColumn(name = "character_id", referencedColumnName = "id"),
+//          inverseJoinColumns = @JoinColumn(name = "filedb_id", referencedColumnName = "id"))
+//  private FileDB fileDB;
+//
+//
+//  public FileDB getFileDB() {
+//    return fileDB;
+//  }
+//
+//  public void setFileDB(FileDB fileDB) {
+//    this.fileDB = fileDB;
+//  }
 
   @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinTable(
@@ -33,17 +47,8 @@ public class Character {
   )
   private Set<Artifact> equippedArtifacts = new HashSet<>();
 
-
   public Character() {
 
-  }
-
-  public Character(String name, String level, String critRate, String critDmg, Set<Artifact> equippedArtifacts) {
-    this.name = name;
-    this.level = level;
-    this.critRate = critRate;
-    this.critDmg = critDmg;
-    this.equippedArtifacts = equippedArtifacts;
   }
 
   public Character(String name, String level, String critRate, String critDmg) {

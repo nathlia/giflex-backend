@@ -43,13 +43,47 @@ public class ArtifactSetTypeController {
     }
 
     @GetMapping("/artifact-set-types/{id}")
-    public ResponseEntity<ArtifactSetType> getArtifactSetTypeById(@PathVariable("id") int id) {
+    public ResponseEntity<ArtifactSetType> getArtifactSetTypeById(@PathVariable("id") int id){
+            Optional<ArtifactSetType> artifactSetTypeData = artifactSetTypeRepository.findById(id);
+        return artifactSetTypeData.map(artifactSetType -> new ResponseEntity<>(artifactSetType, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
+    @PostMapping("/artifact-set-types")
+    public ResponseEntity<ArtifactSetType> addArtifactSetType(@RequestBody ArtifactSetType artifactSetType) {
+        ArtifactSetType _artifactSetType = (artifactSetTypeRepository.save(new ArtifactSetType(
+                artifactSetType.getName(),
+                artifactSetType.getTwopieces(),
+                artifactSetType.getFourpieces()
+
+        )));
+        return new ResponseEntity<>(_artifactSetType, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/artifact-set-types/{id}")
+    public ResponseEntity<ArtifactSetType> editArtifactSetType(@PathVariable("id") int id, @RequestBody ArtifactSetType artifactSetType ) {
         Optional<ArtifactSetType> artifactSetTypeData = artifactSetTypeRepository.findById(id);
 
         if (artifactSetTypeData.isPresent()) {
-            return new ResponseEntity<>(artifactSetTypeData.get(), HttpStatus.OK);
+            ArtifactSetType _artifactSetType = artifactSetTypeData.get();
+            _artifactSetType.setName(artifactSetType.getName());
+            _artifactSetType.setTwopieces(artifactSetType.getTwopieces());
+            _artifactSetType.setFourpieces(artifactSetType.getFourpieces());
+
+            return new ResponseEntity<>(artifactSetTypeRepository.save(_artifactSetType), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/artifact-set-types/{id}")
+    public ResponseEntity<ArtifactSetType> deleteArtifactSetTypeById(@PathVariable("id") int id) {
+
+        try {
+            artifactSetTypeRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
